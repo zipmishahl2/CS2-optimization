@@ -51,7 +51,7 @@ https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=shari
 ![разрешение](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5f717e04-5fd9-4416-8911-27f34d538699)
 ![режим приоритета](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/77c7a98d-ee5f-4a6a-905d-c232e03409c9)
 ![хороший звук](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/6979a9b0-558b-49d6-aee3-09d599c391cb)
-# Настройка Диспетчер Задач
+# Настройка Диспетчер Устройств 
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/90a00eb2-04bd-43dd-bc3f-ca6c1845c987)
 # Настройка Интернета
 - все тут галочки убрать, и оставить две галочки как у скриншота
