@@ -25,8 +25,6 @@
 * CSM support (откл если винда на GPT)
 * CPG Lock
 # Выбор Windows под КС2
-ReviOS 10 23.08 | 11 23.08
-
 XOS 10 , 11 
 
 GhostOS 10 
