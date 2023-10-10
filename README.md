@@ -28,6 +28,8 @@ __изменения 2025 году будет из за ухода вин10__
 
 # Электропитание Windows 
 - советуем использовать Высокая производительность
+https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=sharing
+настройка Электропитание Windows 
 # Настройка CS2
 ![графика](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/11c0244f-066f-447d-8fc0-b430c16e5631)
 ![video](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5f717e04-5fd9-4416-8911-27f34d538699)
