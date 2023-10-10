@@ -65,6 +65,7 @@ video https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp
 - engine_low_latency_sleep_after_client_tick true
 - fps_max 0
 - rate 10000000
+- иногда надо чистить консоль пишем: clearall
 # Сейчас мы разберемся как еще повысить фпс, ожидайте!
 # Конец
 Что мы добились за это время?
