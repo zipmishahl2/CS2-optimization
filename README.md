@@ -43,6 +43,7 @@ __изменения 2025 году будет из за ухода вин10__
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/d9de6eae-c0c0-4faa-bd31-18a625e1ea59)
 - энергопотребление электропитания отключаем
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/086afc19-9d99-4a27-8ade-b9f609edb370)
+
 video https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=sharing
 
 
