@@ -7,7 +7,22 @@
 Оперативной памяти: 16 ГБ
 
 ### 120 FPS > 200 FPS
-### После обновления стало 380
+### После обновления стало 383
+# Настройка BIOS для повышения ФПС
+### AMD отключение
+* Fast boot - откл (синие экраны жалуются люди) 
+* SVM Mode (виртуализация это AMD-V)
+* XMP профиль включить (профиль 1)
+* TPM и Seture Boot оставить (если у вас вин11)
+* amd cool n quiet откл (энергосбережения функция)
+* CSM support (откл если винда на GPT)
+### INTEL отключение
+* VT-d виртуалка
+* Fast boot (синие экраны жалуются люди)
+* lntel Speed Shit Technology
+* Hyper-Threading
+* CSM support (откл если винда на GPT)
+* CPG Lock
 # Выбор Windows под КС2
 ReviOS 10 23.08 | 11 23.08
 
@@ -40,15 +55,15 @@ https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=shari
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/90a00eb2-04bd-43dd-bc3f-ca6c1845c987)
 # Настройка Интернета
 - все тут галочки убрать, и оставить две галочки как у скриншота
+- QoS лучше отключить, смысла нету
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/77414f65-28a2-47fa-bed9-0af81f19e396)
-![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/ec4b1da2-779a-447c-b554-0d0ee22e6da3)
 
-- тут надо отключить NetBios т.к это прослушка вас в интернете
-![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/d9de6eae-c0c0-4faa-bd31-18a625e1ea59)
 - энергопотребление электропитания отключаем
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/086afc19-9d99-4a27-8ade-b9f609edb370)
 
-video https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=sharing
+video о настройки интернета
+Realtek инет
+https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=sharing
 
 
 # Вопросы
