@@ -25,9 +25,9 @@
 * CSM support (откл если винда на GPT)
 * CPG Lock
 # Выбор Windows под КС2
-XOS 10 , 11 
+XOS win10 | win11
 
-GhostOS 10 
+SystemX win10 
 
 MishaModOS win10 22H2 | win11 23H2
 
