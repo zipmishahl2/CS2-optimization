@@ -66,6 +66,18 @@ video https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp
 - fps_max 0
 - rate 10000000
 - иногда надо чистить консоль пишем: clearall
+# Результат Оптимизации КС2
+![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/74e6ed51-b9f1-4e04-a315-23d43185b40f)
+
+После отключение команды r_csgo_water_effects false
+
+
+![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/ea288671-c6a5-4899-9514-ff649cea853d)
+engine_low_latency_sleep_after_client_tick true
+после включение одного команды 
+
+![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/4010652e-37db-4f9d-8ae2-5dfdcb47bd34)
+после написания rate 10000000 (Лучше делает отклик мыши и сервера отклика)
 # Сейчас мы разберемся как еще повысить фпс, ожидайте!
 # Конец
 Что мы добились за это время?
