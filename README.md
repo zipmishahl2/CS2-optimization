@@ -33,7 +33,7 @@ https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=shari
 # Настройка CS2
 ![графика](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/11c0244f-066f-447d-8fc0-b430c16e5631)
 ![video](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5f717e04-5fd9-4416-8911-27f34d538699)
-(http![цп 0 убрать](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/c7bf91c3-b438-42c2-8096-978cf8115128)
+![цп 0 убрать](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/c7bf91c3-b438-42c2-8096-978cf8115128)
 ![режим CS2](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/77c7a98d-ee5f-4a6a-905d-c232e03409c9)
 ![звук](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/6979a9b0-558b-49d6-aee3-09d599c391cb)
 # Настройка Диспетчер Задач
