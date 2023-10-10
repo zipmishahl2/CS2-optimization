@@ -47,11 +47,12 @@ __изменения 2025 году будет из за ухода вин10__
 https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=sharing
 настройка Электропитание Windows 
 # Настройка CS2
+- советуем отключить Reflex NVIDIA
 ![графика](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/11c0244f-066f-447d-8fc0-b430c16e5631)
-![video](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5f717e04-5fd9-4416-8911-27f34d538699)
-![цп 0 убрать](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/c7bf91c3-b438-42c2-8096-978cf8115128)
-![режим CS2](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/77c7a98d-ee5f-4a6a-905d-c232e03409c9)
-![звук](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/6979a9b0-558b-49d6-aee3-09d599c391cb)
+
+![разрешение](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5f717e04-5fd9-4416-8911-27f34d538699)
+![режим приоритета](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/77c7a98d-ee5f-4a6a-905d-c232e03409c9)
+![хороший звук](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/6979a9b0-558b-49d6-aee3-09d599c391cb)
 # Настройка Диспетчер Задач
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/90a00eb2-04bd-43dd-bc3f-ca6c1845c987)
 # Настройка Интернета
@@ -86,18 +87,18 @@ https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=shari
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/74e6ed51-b9f1-4e04-a315-23d43185b40f)
 
 После отключение команды r_csgo_water_effects false
-
+_________________
 
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/ea288671-c6a5-4899-9514-ff649cea853d)
 engine_low_latency_sleep_after_client_tick true
 после включение одного команды 
-
+_________________
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/4010652e-37db-4f9d-8ae2-5dfdcb47bd34)
 после написания rate 10000000 (Лучше делает отклик мыши и сервера отклика)
 # Сейчас мы разберемся как еще повысить фпс, ожидайте!
 # Конец
 Что мы добились за это время?
-Мы сделали в кс2 больше фпс 40 кадров++ ФПС
+Мы сделали в кс2 больше кадров для плавной игры
 
 после перезапуск пк каждые дни будет прибавляться фпс когда добавится он уже закончит что набрал сумму свою для КС2
 # Поддержать за трудную работу
