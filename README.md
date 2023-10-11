@@ -27,6 +27,8 @@
 # Выбор Windows под КС2
 XOS win10 | win11
 
+default win10 | win11
+
 SystemX win10 
 
 MishaModOS win10 22H2 | win11 23H2
