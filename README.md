@@ -27,7 +27,7 @@
 # Выбор Windows под КС2
 XOS win10 | win11
 
-default win10 | win11
+win10 lite | win11 lite
 
 SystemX win10 
 
