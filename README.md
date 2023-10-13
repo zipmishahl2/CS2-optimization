@@ -43,6 +43,7 @@ __изменения 2025 году будет из за ухода вин10__
 этот твик выключает оверлей кс2 чтобы играли без фризов 
 
 # Настройка NVIDIA
+👌[Скачать NVIDIA Лучший драйвер](https://drive.google.com/file/d/1vk11R72kxsTqFP1tB6JC67Lzgy0E0Nsf/view?usp=sharing)
 ![PhysX видюха](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/dc709dc0-4321-4fb6-a405-2376f2443cc6)
 ![раскраска цветов](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5a2fd82c-4a79-4f24-bfc3-33ce8a892cc3)
 ![раскраска цветов (2)](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/7c05490c-bc88-46d0-86d5-d86f502a44fe)
