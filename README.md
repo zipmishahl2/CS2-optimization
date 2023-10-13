@@ -42,6 +42,20 @@ __изменения 2025 году будет из за ухода вин10__
 окей, для того чтобы игра была без фризов маленьких, примите этот твик который находится в releases
 этот твик выключает оверлей кс2 чтобы играли без фризов 
 
+# Настройка NVIDIA
+![PhysX видюха](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/dc709dc0-4321-4fb6-a405-2376f2443cc6)
+![раскраска цветов](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5a2fd82c-4a79-4f24-bfc3-33ce8a892cc3)
+![раскраска цветов (2)](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/7c05490c-bc88-46d0-86d5-d86f502a44fe)
+![разрешение экрана](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/8d852cf7-d99c-40ed-8367-1a9615a783d5)
+![настройка цвет](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/e34e676b-34d8-4354-b803-55f83ebfae0e)
+![Настройка дефеловер](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/817d3ce1-0423-4bcd-b7c5-608b6f27c5b3)
+![настройка 3D (3)](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/146979ab-0832-4131-a606-39672cfe7260)
+![настройка 3D (2)](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/a175cb1b-2053-43f9-b8d3-ba7c57a4e7b9)
+![настройка 3D (1)](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/cec77541-d6d1-4093-84c4-c2afe9de4e18)
+![Настройка 1](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/6a60a39c-f05c-46e3-93d3-6a1706f338cf)
+![выкл звук на мониторе](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/fd38be65-a366-4854-beba-1b83199b59ff)
+![включить дефеловер](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/2741a0ff-0bfe-4518-af9e-c73fa193777e)
+
 # Электропитание Windows 
 - советуем использовать Высокая производительность
 https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=sharing
