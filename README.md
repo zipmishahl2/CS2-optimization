@@ -55,7 +55,7 @@ __изменения 2025 году будет из за ухода вин10__
 ![настройка 3D (1)](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/cec77541-d6d1-4093-84c4-c2afe9de4e18)
 ![Настройка 1](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/6a60a39c-f05c-46e3-93d3-6a1706f338cf)
 ![выкл звук на мониторе](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/fd38be65-a366-4854-beba-1b83199b59ff)
-![включить дефеловер](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/2741a0ff-0bfe-4518-af9e-c73fa193777e)
+![включить разработчика режим](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/2741a0ff-0bfe-4518-af9e-c73fa193777e)
 
 # Электропитание Windows 
 - советуем использовать Высокая производительность
