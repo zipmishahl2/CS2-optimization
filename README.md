@@ -98,15 +98,12 @@ https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=shari
 сделает хуже
 
 # Хорошие команды для повышение ФПС
-- r_csgo_water_effects false
 - engine_low_latency_sleep_after_client_tick true
 - fps_max 0
 - rate 10000000
-- иногда надо чистить консоль пишем: clearall
+- иногда надо чистить консоль пишем:
+- alias C "clear; clearall; clear_bombs"
 # Результат Оптимизации КС2
-![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/74e6ed51-b9f1-4e04-a315-23d43185b40f)
-
-После отключение команды r_csgo_water_effects false
 _________________
 
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/ea288671-c6a5-4899-9514-ff649cea853d)
