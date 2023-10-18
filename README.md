@@ -26,11 +26,11 @@
 # Выбор Windows под КС2
 XOS win10 | win11
 
+AtlasOS
+
 win11 lite
 
 SystemX win10 
-
-MishaModOS win10 22H2 | win11 23H2
 
 __изменения 2025 году будет из за ухода вин10__
 
@@ -42,7 +42,7 @@ __изменения 2025 году будет из за ухода вин10__
 этот твик выключает оверлей кс2 чтобы играли без фризов 
 
 # Параметры запуска CS2
-- -novid -tickrate 128 -high -threads 6 +fps_max 0 -d3d9ex -nojoy -maxdownloadfilesizemb 2000
+- -novid -nojoy -nopreload -softparticledefaultoff -d3d9ex -limitvsconst
 # Настройка NVIDIA
 👌[Скачать NVIDIA Лучший драйвер](https://drive.google.com/file/d/1vk11R72kxsTqFP1tB6JC67Lzgy0E0Nsf/view?usp=sharing)
 ![PhysX видюха](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/dc709dc0-4321-4fb6-a405-2376f2443cc6)
