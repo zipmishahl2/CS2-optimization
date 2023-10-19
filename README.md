@@ -26,9 +26,7 @@
 # Выбор Windows под КС2
 XOS win10 | win11
 
-AtlasOS
-
-win11 lite
+HypeOS
 
 SystemX win10 
 
