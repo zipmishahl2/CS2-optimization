@@ -87,7 +87,10 @@ video о настройки интернета
 Realtek инет
 https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=sharing
 
+# Импут Лаг CS2
+[Посмотреть КЛИК](https://docs.google.com/spreadsheets/d/11JYxixzy106DXcrxrDGYf2lwCzUVvHHyFNCv0Cb0HLI/edit?usp=drivesdk)
 
+КС2 импут лаг (Таблицы)
 # Вопросы
 Что за оверлей в кс2?
 Оверлей CS2 — часть интерфейса, которая открывается поверх почти любой игры, запущенной в Steam. Она позволяет пользователю получить доступ к списку друзей, браузеру, чату и внутриигровым покупкам.
