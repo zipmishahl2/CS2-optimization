@@ -82,7 +82,7 @@ Realtek инет
 https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=sharing
 
 # Импут Лаг CS2
-[Посмотреть КЛИК](https://docs.google.com/spreadsheets/d/11JYxixzy106DXcrxrDGYf2lwCzUVvHHyFNCv0Cb0HLI/edit?usp=drivesdk)
+[🗿Посмотреть КЛИК](https://docs.google.com/spreadsheets/d/11JYxixzy106DXcrxrDGYf2lwCzUVvHHyFNCv0Cb0HLI/edit?usp=drivesdk)
 
 КС2 импут лаг (Таблицы)
 # Вопросы
@@ -109,7 +109,6 @@ engine_low_latency_sleep_after_client_tick true
 _________________
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/4010652e-37db-4f9d-8ae2-5dfdcb47bd34)
 после написания rate 10000000 (Лучше делает отклик мыши и сервера отклика)
-# Сейчас мы разберемся как еще повысить фпс, ожидайте!
 # Конец
 Что мы добились за это время?
 Мы сделали в кс2 больше кадров для плавной игры
