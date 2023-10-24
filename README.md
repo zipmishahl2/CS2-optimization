@@ -41,7 +41,7 @@ __изменения 2025 году будет из за ухода вин10__
 этот твик выключает оверлей кс2 чтобы играли без фризов 
 
 # Параметры запуска CS2
-- -novid -nojoy -nopreload -softparticledefaultoff -d3d9ex -limitvsconst
+-novid -nojoy -nopreload -softparticledefaultoff -d3d9ex -limitvsconst -particles 512 -language english
 # Настройка NVIDIA
 👌[Скачать NVIDIA Лучший драйвер](https://drive.google.com/file/d/1vk11R72kxsTqFP1tB6JC67Lzgy0E0Nsf/view?usp=sharing)
 ![PhysX видюха](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/dc709dc0-4321-4fb6-a405-2376f2443cc6)
@@ -81,7 +81,7 @@ __изменения 2025 году будет из за ухода вин10__
 
 video о настройки интернета
 Realtek инет
-https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=sharing
+[Настройка инета КЛИК](https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=sharing)
 
 # Импут Лаг CS2
 [🗿Посмотреть КЛИК](https://docs.google.com/spreadsheets/d/11JYxixzy106DXcrxrDGYf2lwCzUVvHHyFNCv0Cb0HLI/edit?usp=drivesdk)
