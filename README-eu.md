@@ -118,4 +118,4 @@ We have made more frames in cs2 for a smooth game
 
 after restarting the pc, fps will be added every day when it is added, it will already finish that it has scored its amount for CS2
 # Support for hard work
-[💵 Задонатить за гайд](https://www.donationalerts.com/r/mishamodhl2)
+[💵 Donate for the guide](https://www.donationalerts.com/r/mishamodhl2)
