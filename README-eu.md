@@ -91,8 +91,12 @@ Realtek internet
 CS2 imput lag (Tables)
 # Questions
 What is the overlay in CS2?
+
 The CS2 overlay is a part of the interface that opens on top of almost any game running on Steam. It allows the user to access the friends list, browser, chat and in-game purchases.
 
+Why optimization?
+
+Optimization - optimizes Windows, speeds up performance and reduces latency/response
 # Problems
 who has a video card below 1000 series
 It's better not to use tweaks
