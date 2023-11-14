@@ -41,7 +41,7 @@ ok, in order for the game to be without small friezes, take this tweak which is 
 This tweak turns off the cs2 overlay so you can play without freezes
 
 # CS2 launch options
--novid -nojoy -nopreload -softparticledefaultoff -d3d9ex -limitvsconst -particles 512 -language english
+-novid -nojoy -nopreload -softparticledefaultoff -d3d9ex -limitvsconst -particles 512 +violence_hblood 0 -language english
 # NVIDIA setup
 👌[Download NVIDIA Best Driver](https://drive.google.com/file/d/1vk11R72kxsTqFP1tB6JC67Lzgy0E0Nsf/view?usp=sharing)
 ![PhysX video](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/dc709dc0-4321-4fb6-a405-2376f2443cc6)
