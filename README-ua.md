@@ -67,6 +67,7 @@ __зміни 2025 року будуть через відхід він10__
 
 
 у кастомному моєму електроживленні все відключено.
+скачати: https://github.com/zipmishahl2/CS2-optimization/releases/tag/power-plan
 # Налаштування КС2
 - радимо вимкнути Reflex NVIDIA
 ![графика](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/11c0244f-066f-447d-8fc0-b430c16e5631)
