@@ -58,10 +58,17 @@ This tweak turns off the cs2 overlay so you can play without freezes
 ![mute the sound on the monitor](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/fd38be65-a366-4854-beba-1b83199b59ff)
 ![enable developer mode](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/2741a0ff-0bfe-4518-af9e-c73fa193777e)
 
-# Windows Power Options
-- we recommend using High performance, powerM in releases github
-[🚀 CLICK settings](https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=sharing)
-Setting Windows Power Options
+# Windows Power 
+- we suggest using High Performance
+- Or use my power supply customization.
+
+[🚀 Customization CLICK](https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=sharing)
+
+customizing Windows Power Supply
+
+
+In my power supply custom everything is disabled.
+download: https://github.com/zipmishahl2/CS2-optimization/releases/tag/power-plan
 # Setting up CS2
 - we recommend disabling Reflex NVIDIA
 ![graphics](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/11c0244f-066f-447d-8fc0-b430c16e5631)
