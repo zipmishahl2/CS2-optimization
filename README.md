@@ -5,4 +5,4 @@
 
 [🇺🇸English](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-eu.md)
 
-[Қазақстан әзірлеуде](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-kz.md)
+[🇰🇿Қазақстан әзірлеуде](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-kz.md)
