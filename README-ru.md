@@ -15,6 +15,7 @@
 * XMP профиль включить (профиль 1)
 * TPM и Seture Boot оставить (если у вас вин11)
 * CSM support (откл если винда на GPT)
+* hyperthreading(SMT Mode) - откл
 ### INTEL отключение
 * VT-d виртуалка
 * Fast boot (синие экраны жалуются люди)
@@ -67,7 +68,7 @@ __изменения 2025 году будет из за ухода вин10__
 
 
 в кастом моей электропитании всё отключено.
-скачать: https://github.com/zipmishahl2/CS2-optimization/releases/tag/power-plan
+скачать: [КЛИК](https://github.com/zipmishahl2/CS2-optimization/releases/tag/power-plan)
 # Настройка КС2
 - советуем отключить Reflex NVIDIA
 ![графика](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/11c0244f-066f-447d-8fc0-b430c16e5631)
