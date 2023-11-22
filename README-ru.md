@@ -17,12 +17,12 @@
 * CSM support (откл если винда на GPT)
 * hyperthreading(SMT Mode) - откл
 ### INTEL отключение
-* VT-d виртуалка
-* Fast boot (синие экраны жалуются люди)
-* lntel Speed Shit Technology
-* Hyper-Threading
+* VT-d виртуалка - откл
+* Fast boot - откл (синие экраны жалуются люди) 
+* lntel Speed Shit Technology - откл
+* Hyper-Threading - откл
 * CSM support (откл если винда на GPT)
-* CPG Lock
+* CPG Lock - откл
 # Выбор Windows под КС2
 XOS win10 | win11
 
