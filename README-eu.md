@@ -1,3 +1,5 @@
+#### copyright © zipmishahl2 GitHub
+
 # CS2 optimization | FPS BOOST
 ## CS2 tests
 Video card: GTX 1060 6GB
