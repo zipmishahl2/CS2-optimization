@@ -99,6 +99,11 @@ Realtek internet
 [🗿View CLICK](https://docs.google.com/spreadsheets/d/11JYxixzy106DXcrxrDGYf2lwCzUVvHHyFNCv0Cb0HLI/edit?usp=drivesdk)
 
 CS2 imput lag (Tables)
+# New from 13.02.2024
+1. Settings -> Sound -> sound - set a specific Playback Device and a specific Audio Voice Recording Device (Not Default Device)
+2. Settings -> Game -> Game - set Buffering to smooth out packet losses to either 1 or 2 packets (test).
+
+Copyright @sledok
 # Questions
 What is the overlay in CS2?
 
