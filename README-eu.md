@@ -123,6 +123,8 @@ will make things worse
 - rate 10000000
 - sometimes you need to clean the console, write:
 - alias C "clear; clearall; clear_bombs"
+- cl_usenewbob false
+- cl_hud_telemetry_serverrecvmargin_graph_show
 # Result of Optimization of CS2
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/ea288671-c6a5-4899-9514-ff649cea853d)
 engine_low_latency_sleep_after_client_tick true
