@@ -123,6 +123,8 @@ Realtek інет
 - rate 10000000
 іноді треба чистити консоль пишемо:
 - alias C "clear; clearall; clear_bombs"
+- cl_usenewbob false
+- cl_hud_telemetry_serverrecvmargin_graph_show
 # Результат Оптимізації КС2
 _________________
 
