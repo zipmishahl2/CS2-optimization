@@ -1,5 +1,3 @@
-[![Discord Presence](https://lanyard.cnrad.dev/api/1005063808441663560)](https://discord.com/users/1005063808441663560)
-
 # click on your language
 [🇷🇺Russian](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-ru.md)
 
