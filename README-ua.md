@@ -22,7 +22,6 @@
 * VT-d віртуалка
 * Fast boot (сині екрани скаржаться люди)
 * lntel Speed Shit Technology
-* Hyper-Threading - вимкнути
 * CSM support (відключити, якщо вінда на GPT)
 * CPG Lock
 # Вибір Windows під КС2
