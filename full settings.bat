@@ -1,15 +1,20 @@
 @Echo Off
 Title full settings
 cd %systemroot%\system32
-set Verison=1.5
+set Verison=1.6
 call :IsAdmin
 
+:: settings commands start windows
 bcdedit /timeout 0
 bcdedit /set quietboot yes
 bcdedit /set {globalsettings} custom:16000067 true
+
+:: timer windows disabled
 bcdedit /set disabledynamictick yes
 bcdedit /set useplatformtick yes
 bcdedit /deletevalue useplatformclock
+
+:: settings device/usb
 FOR /f %%a in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr /l "USB\VID_"') do (
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot reg -actn setowner -ownr "n:Administrators"
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot reg -actn ace -ace "n:Administrators;p:full"
@@ -54,6 +59,7 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 	ECHO Disabling USB idling for %%a
 )
 
+:: full regedit settings
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v Start /t REG_DWORD /d 4 /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service" /v Start /t REG_DWORD /d 4 /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagsvc" /v Start /t REG_DWORD /d 4 /f
@@ -1162,6 +1168,8 @@ Reg.exe delete "HKCU\System\GameConfigStore\Children" /f
 Reg.exe delete "HKCU\System\GameConfigStore\Parents" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d 0 /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
+
+:: schtasks disabled 
 schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64 Critical" /DISABLE > NUL 2>&1
@@ -1189,6 +1197,8 @@ schtasks /change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\WindowsColorSystem\Calibration Loader" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchronization" /DISABLE > NUL 2>&1
+
+:: disabled hibernate
 powercfg /hibernate off
 Exit
 
