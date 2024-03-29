@@ -4,6 +4,9 @@ cd %systemroot%\system32
 set Verison=1.5
 call :IsAdmin
 
+bcdedit /timeout 0
+bcdedit /set quietboot yes
+bcdedit /set {globalsettings} custom:16000067 true
 bcdedit /set disabledynamictick yes
 bcdedit /set useplatformtick yes
 bcdedit /deletevalue useplatformclock
