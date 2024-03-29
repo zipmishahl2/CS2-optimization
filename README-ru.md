@@ -22,7 +22,6 @@
 * VT-d виртуалка - откл
 * Fast boot - откл (синие экраны жалуются люди) 
 * lntel Speed Shit Technology - откл
-* Hyper-Threading - откл
 * CSM support (откл если винда на GPT)
 * CPG Lock - откл
 # Выбор Windows под КС2
