@@ -22,7 +22,6 @@ RAM: 16 GB
 * VT-d virtual machine
 * Fast boot (blue screens people complain about)
 * lntel Speed Shit Technology
-* Hyper-Threading off
 * CSM support (disabled if Windows is on GPT)
 *CPG Lock
 # Selecting Windows for KS2
