@@ -1223,7 +1223,7 @@ echo disabled powerplan hibernate
 powercfg /hibernate off
 :end
 echo you must restart your pc
-Exit
+pause
 
 :IsAdmin
 Reg.exe query "HKU\S-1-5-19\Environment"
