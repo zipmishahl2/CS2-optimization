@@ -4,7 +4,7 @@ cd %systemroot%\system32
 set Verison=1.6
 call :IsAdmin
 
-echo settings commands start winbdows
+echo settings commands start windows
 :: settings commands start windows
 bcdedit /timeout 0
 bcdedit /set quietboot yes
