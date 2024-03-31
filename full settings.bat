@@ -1,20 +1,56 @@
-@Echo Off
-Title full settings
-cd %systemroot%\system32
-set Verison=1.6
-call :IsAdmin
+@echo  off
+set Version=1.6
+break off
+color 03
+chcp 65001
+cls
+md C:\cs2-optimization
+call :adminwindow
 
-:: settings commands start windows
+:Home
+title Home - Snow Booster
+mode 104, 17
+color 03
+cls
+echo  +------------------------------------------------------------------------------------------------------------+
+echo  ¦         ████████████████████████████████████████████████████████████████████████████████████               ¦
+echo  ¦         █─▄▄▄─█─▄▄▄▄█▀▄▄▀███─▄▄─█▄─▄▄─█─▄─▄─█▄─▄█▄─▀█▀─▄█▄─▄█░▄▄░▄██▀▄─██─▄─▄─█─▄▄─█▄─▀█▄─▄█               ¦
+echo  ¦         █─███▀█▄▄▄▄─██▀▄████─██─██─▄▄▄███─████─███─█▄█─███─███▀▄█▀██─▀─████─███─██─██─█▄▀─██               ¦
+echo  ¦         ▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▀▀▄▄▄▄▀▄▄▄▀▀▀▀▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▀▄▄▄▀▀▄▄▀               ¦ 
+echo  ¦------------------------------------------------------------------------------------------------------------¦
+echo  ¦                            It is not recommended to optimize on laptops                            ¦
+echo  ¦----------------------------------------------------------------------------------------------------¦
+echo  ¦           [1] Optimization                                 [2] Disabling services                  ¦
+echo  ¦----------------------------------------------------------------------------------------------------¦
+echo  ¦ Version: %Version%                                                                                 ¦
+echo  ¦----------------------------------------------------------------------------------------------------¦
+echo  ¦ Press function number (1-2):                                                                       ¦
+echo  +----------------------------------------------------------------------------------------------------+
+choice /c 12345 /n
+set HomeSelection=%errorlevel%
+if %HomeSelection% == 1 (call :optimization)
+if %HomeSelection% == 2 (call :services)
+pause
+
+:Optimization
+title Optimization - CS2
+mode 150, 40
+color 03
+cls
+echo We are setting up your PC...
+echo.
 bcdedit /timeout 0
 bcdedit /set quietboot yes
 bcdedit /set {globalsettings} custom:16000067 true
-
-:: timer windows disabled
 bcdedit /set disabledynamictick yes
 bcdedit /set useplatformtick yes
 bcdedit /deletevalue useplatformclock
+timeout /t 1 /nobreak >nul
+cls
+echo Making changes to the registry...
+echo.
 
-:: settings device/usb
+:settingsDevice/usb
 FOR /f %%a in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr /l "USB\VID_"') do (
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot reg -actn setowner -ownr "n:Administrators"
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot reg -actn ace -ace "n:Administrators;p:full"
@@ -58,8 +94,9 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 	REG ADD "HKLM\SYSTEM\CurrentControlSet\Enum\%%a\Device Parameters" /F /V "SelectiveSuspendEnabled" /T REG_DWORD /d 0 >NUL 2>&1
 	ECHO Disabling USB idling for %%a
 )
+goto settings device/usb ready.
 
-:: full regedit settings
+:regeditSettings
 Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "ShowStartupPanel" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "GamePanelStartupTipIndex" /t REG_DWORD /d "3" /f 
 Reg.exe add "HKCU\SOFTWARE\Microsoft\GameBar" /v "AllowAutoGameMode" /t REG_DWORD /d "0" /f 
@@ -75,7 +112,6 @@ Reg.exe add "HKCU\System\GameConfigStore" /v "GameDVR_DSEBehavior" /t REG_DWORD 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\ApplicationManagement\AllowGameDVR" /v "value" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v "AllowGameDVR" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f 
-Reg.exe add "HKU\.DEFAULT\SOFTWARE\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f 
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NetworkThrottlingIndex" /t REG_DWORD /d "10" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "SystemResponsiveness" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NoLazyMode" /t REG_DWORD /d "1" /f
@@ -90,11 +126,6 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout
 Reg.exe add "HKLM\SYSTEM\ControlSet001\Control\Session Manager\Memory Management" /v "LargeSystemCache" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d "0" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Sense" /v "Start" /t REG_DWORD /d "4" /f
-Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d "1" /f
 Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "ServiceKeepAlive" /t REG_DWORD /d "0" /f
@@ -1161,11 +1192,9 @@ Reg.exe delete "HKCU\System\GameConfigStore\Children" /f
 Reg.exe delete "HKCU\System\GameConfigStore\Parents" /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d 0 /f
 Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
-:end
-echo ready.
+goto settings regedit ready.
 
-echo schtasks disabled
-:: schtasks disabled 
+:schtasks disabled 
 schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64 Critical" /DISABLE > NUL 2>&1
@@ -1193,8 +1222,20 @@ schtasks /change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\WindowsColorSystem\Calibration Loader" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchronization" /DISABLE > NUL 2>&1
+cls
+echo Need a reboot, restart pc now or later?
+echo.
+echo [1] Reboot pc now
+echo.
+echo [2] Later and return home
+echo.
+choice /c 12 /n
+set OptimizationSelection=%errorlevel%
+if %OptimizationSelection% == 1 (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
+if %OptimizationSelection% == 2 (goto home)
+goto home
 
-:: disabled services windows
+:disabled services windows
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v Start /t REG_DWORD /d 4 /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service" /v Start /t REG_DWORD /d 4 /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagsvc" /v Start /t REG_DWORD /d 4 /f
@@ -1202,16 +1243,32 @@ Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WbioSrvc" /v S
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MapsBroker" /v Start /t REG_DWORD /d 4 /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc" /v Start /t REG_DWORD /d 4 /f
 Reg.exe add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UevAgentService" /v Start /t REG_DWORD /d 4 /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Sense" /v "Start" /t REG_DWORD /d "4" /f
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /v "Start" /t REG_DWORD /d "4" /f
+goto disabled services windows...
 
-:: disabled hibernate
+:disabled hibernate
 powercfg /hibernate off
-exit
+goto power plan hibernate disabled...
 
-:IsAdmin
-Reg.exe query "HKU\S-1-5-19\Environment"
-If Not %ERRORLEVEL% EQU 0 (
- Cls & Echo You must have administrator rights to continue ... 
- Pause & Exit
-)
-Cls
-goto:eof
+:adminwindow
+mode 104, 17
+msg * Run cs2-optimization as Administrator, pls
+echo Wait 5 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 4 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 3 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 2 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 1 second...
+timeout /t 1 /nobreak >nul
+goto home
