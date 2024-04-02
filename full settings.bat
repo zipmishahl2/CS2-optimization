@@ -70,15 +70,36 @@ PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-A
 PowerShell -Command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
 Powershell -Command "Get-appxpackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage"
-:: BSD tweaking..
-echo BSD tweaking
-bcdedit /timeout 0
-bcdedit /set quietboot yes
-bcdedit /set {globalsettings} custom:16000067 true
-bcdedit /set disabledynamictick yes
-bcdedit /set useplatformtick yes
-bcdedit /seplatformtick No
+:: BCD Tweaks
+echo Applying BCD Tweaks
+bcdedit /set useplatformclock No
+bcdedit /set platformtick No
+bcdedit /set disabledynamictick Yes
 bcdedit /deletevalue useplatformclock
+bcdedit /set tscsyncpolicy Enhanced
+bcdedit /set firstmegabytepolicy UseAll
+bcdedit /set avoidlowmemory 0x8000000
+bcdedit /set nolowmem Yes
+bcdedit /set allowedinmemorysettings 0x0
+bcdedit /set isolatedcontext No
+bcdedit /set vsmlaunchtype Off
+bcdedit /set vm No
+bcdedit /set x2apicpolicy Enable
+bcdedit /set configaccesspolicy Default
+bcdedit /set MSI Default
+bcdedit /set usephysicaldestination No
+bcdedit /set usefirmwarepcisettings No
+bcdedit /set disableelamdrivers Yes
+bcdedit /set pae ForceEnable 
+bcdedit /set nx optout
+bcdedit /set highestmode Yes
+bcdedit /set forcefipscrypto No
+bcdedit /set noumex Yes
+bcdedit /set uselegacyapicmode No
+bcdedit /set ems No
+bcdedit /set extendedinput Yes
+bcdedit /set debug No
+bcdedit /set hypervisorlaunchtype Off
 :: Disable NVIDIA Telemetry
 echo Disabling NVIDIA Telemetry
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "NvBackend" /f
