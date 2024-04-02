@@ -39,6 +39,12 @@ color 03
 cls
 echo We are setting up your PC...
 echo.
+:: powershell tweaking
+echo PowerShell tweaking
+PowerShell -Command "Disable-MMAgent -PageCombining"
+PowerShell -Command "Disable-MMAgent -MemoryCompression"
+:: BSD tweaking..
+echo BSD tweaking
 bcdedit /timeout 0
 bcdedit /set quietboot yes
 bcdedit /set {globalsettings} custom:16000067 true
@@ -47,10 +53,19 @@ bcdedit /set useplatformtick yes
 bcdedit /seplatformtick No
 bcdedit /deletevalue useplatformclock
 timeout /t 1 /nobreak >nul
+:: NFTS tweaking..
+echo NFTS tweaking...
+fsutil behavior set memoryusage 2
+fsutil behavior set mftzone 4
+fsutil behavior set disablelastaccess 1
+fsutil behavior set disabledeletenotify 0
+fsutil behavior set encryptpagingfile 0
 cls
 echo Making changes to the registry...
 echo.
 
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "SleepReliabilityDetailedDiagnostics" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\AppModel" /v "Start" /t REG_DWORD /d "0" /f 
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Cellcore" /v "Start" /t REG_DWORD /d "0" /f 
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Circular Kernel Context Logger" /v "Start" /t REG_DWORD /d "0" /f 
@@ -1220,7 +1235,6 @@ for /f %%a in ('wmic PATH Win32_USBHub GET DeviceID ^| findstr /l "USB\ROOT_HUB"
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters\WDF" -ot reg -actn setowner -ownr "n:Administrators"
 reg.exe add "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters\WDF" /v IdleInWorkingState /t REG_DWORD /d 00000000 /f
 )
-PowerShell "Disable-MMAgent -MemoryCompression"
 FOR /F "eol=E" %%a in ('REG QUERY "HKLM\SYSTEM\CurrentControlSet\Services" /S /F "EnableHIPM"^| FINDSTR /V "EnableHIPM"') DO (
 	REG ADD "%%a" /F /V "EnableHIPM" /T REG_DWORD /d 0 >NUL 2>&1
 	REG ADD "%%a" /F /V "EnableDIPM" /T REG_DWORD /d 0 >NUL 2>&1
