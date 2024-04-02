@@ -43,6 +43,34 @@ echo.
 echo PowerShell tweaking
 PowerShell -Command "Disable-MMAgent -PageCombining"
 PowerShell -Command "Disable-MMAgent -MemoryCompression"
+
+echo Removing Unnecessary Powershell Packages
+PowerShell -Command "Get-AppxPackage -allusers *3DBuilder* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *bing* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *bingfinance* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *bingsports* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *BingWeather* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *CommsPhone* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *Drawboard PDF* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *Facebook* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *Getstarted* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.Messaging* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *MicrosoftOfficeHub* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *Office.OneNote* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *OneNote* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *people* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *SkypeApp* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *solit* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *Sway* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *Twitter* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *WindowsAlarms* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *WindowsPhone* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *WindowsMaps* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *WindowsFeedbackHub* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
+Powershell -Command "Get-appxpackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage"
 :: BSD tweaking..
 echo BSD tweaking
 bcdedit /timeout 0
@@ -60,10 +88,42 @@ fsutil behavior set mftzone 4
 fsutil behavior set disablelastaccess 1
 fsutil behavior set disabledeletenotify 0
 fsutil behavior set encryptpagingfile 0
+:: device manager settings
+curl -g -k -L -# -o "C:\Windows\System32\DevManView.exe" "https://github.com/ancel1x/Ancels-Performance-Batch/raw/main/bin/DevManView.exe"
+DevManView.exe /disable "High Precision Event Timer"
+DevManView.exe /disable "Microsoft GS Wavetable Synth"
+DevManView.exe /disable "Intel Management Engine"
+DevManView.exe /disable "Intel Management Engine Interface"
+DevManView.exe /disable "Intel SMBus"
+DevManView.exe /disable "SM Bus Controller"
+DevManView.exe /disable "Amdlog"
+DevManView.exe /disable "AMD PSP"
+DevManView.exe /disable "System Speaker"
+DevManView.exe /disable "Composite Bus Enumerator"
+DevManView.exe /disable "Microsoft Virtual Drive Enumerator"
+DevManView.exe /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
+DevManView.exe /disable "NDIS Virtual Network Adapter Enumerator"
+DevManView.exe /disable "Remote Desktop Device Redirector Bus"
+DevManView.exe /disable "UMBus Root Bus Enumerator"
+DevManView.exe /disable "WAN Miniport (IP)"
+DevManView.exe /disable "WAN Miniport (IKEv2)"
+DevManView.exe /disable "WAN Miniport (IPv6)"
+DevManView.exe /disable "WAN Miniport (L2TP)"
+DevManView.exe /disable "WAN Miniport (PPPOE)"
+DevManView.exe /disable "WAN Miniport (PPTP)"
+DevManView.exe /disable "WAN Miniport (SSTP)"
+DevManView.exe /disable "WAN Miniport (Network Monitor)"
 cls
 echo Making changes to the registry...
 echo.
 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d "0" /f 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d "0" /f 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d "0" /f 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d "0" /f 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d "0" /f 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWebOverMeteredConnections" /t REG_DWORD /d "0" /f 
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "SleepReliabilityDetailedDiagnostics" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\AppModel" /v "Start" /t REG_DWORD /d "0" /f 
