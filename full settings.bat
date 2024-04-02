@@ -13,10 +13,10 @@ mode 104, 17
 color 03
 cls
 echo  +------------------------------------------------------------------------------------------------------------+
-echo  ¦         ████████████████████████████████████████████████████████████████████████████████████               ¦
-echo  ¦         █─▄▄▄─█─▄▄▄▄█▀▄▄▀███─▄▄─█▄─▄▄─█─▄─▄─█▄─▄█▄─▀█▀─▄█▄─▄█░▄▄░▄██▀▄─██─▄─▄─█─▄▄─█▄─▀█▄─▄█               ¦
-echo  ¦         █─███▀█▄▄▄▄─██▀▄████─██─██─▄▄▄███─████─███─█▄█─███─███▀▄█▀██─▀─████─███─██─██─█▄▀─██               ¦
-echo  ¦         ▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▀▀▄▄▄▄▀▄▄▄▀▀▀▀▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▀▄▄▄▀▀▄▄▀               ¦ 
+echo  ¦       ████████████████████████████████████████████████████████████████████████████████████  ¦
+echo  ¦       █─▄▄▄─█─▄▄▄▄█▀▄▄▀███─▄▄─█▄─▄▄─█─▄─▄─█▄─▄█▄─▀█▀─▄█▄─▄█░▄▄░▄██▀▄─██─▄─▄─█─▄▄─█▄─▀█▄─▄█  ¦
+echo  ¦       █─███▀█▄▄▄▄─██▀▄████─██─██─▄▄▄███─████─███─█▄█─███─███▀▄█▀██─▀─████─███─██─██─█▄▀─██  ¦
+echo  ¦       ▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▀▀▀▄▄▄▄▀▄▄▄▀▀▀▀▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▀▄▄▄▀▀▄▄▀  ¦ 
 echo  ¦------------------------------------------------------------------------------------------------------------¦
 echo  ¦                            It is not recommended to optimize on laptops                                    ¦
 echo  ¦------------------------------------------------------------------------------------------------------------¦
@@ -109,7 +109,7 @@ fsutil behavior set disablelastaccess 1
 fsutil behavior set disabledeletenotify 0
 fsutil behavior set encryptpagingfile 0
 :: device manager settings
-curl -g -k -L -# -o "C:\Windows\System32\DevManView.exe" "https://github.com/ancel1x/Ancels-Performance-Batch/raw/main/bin/DevManView.exe"
+curl -g -k -L -# -o "C:\Windows\System32\DevManView.exe" "https://github.com/zipmishahl2/CS2-optimization/raw/main/DevManView.exe"
 DevManView.exe /disable "High Precision Event Timer"
 DevManView.exe /disable "Microsoft GS Wavetable Synth"
 DevManView.exe /disable "Intel Management Engine"
