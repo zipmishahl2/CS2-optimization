@@ -41,8 +41,8 @@ echo.
 
 :: Import Power Plan
 curl -g -k -L -# -o "C:\PowerPlan.pow" "https://github.com/zipmishahl2/CS2-optimization/raw/main/powerplan.pow"
-powercfg -import "C:\PowerPlan.pow" 11111111-1111-1111-1111-111111111111
-powercfg -setactive 11111111-1111-1111-1111-111111111111
+powercfg -import "C:\PowerPlan.pow" a6df1428-f7b4-4039-89a2-9857401b8c37
+powercfg -setactive a6df1428-f7b4-4039-89a2-9857401b8c37
 echo power plan hibernate disabled...
 powercfg /hibernate off
 :: clear pc
