@@ -19,7 +19,7 @@ echo  ¦ #####~~##~~~~~~~~##~~##~#####~~~~##~~~~~##~~~##~#~#~~~##~~~~~##~~~#####
 echo  ¦ ##~~~~~##~~##~~~~##~~##~##~~~~~~~##~~~~~##~~~##~~~#~~~##~~~~##~~~~##~~##~~~##~~~~~##~~~##~~##~##~~##       ¦
 echo  ! ##~~~~~~####~~~~~~####~~##~~~~~~~##~~~######~##~~~#~######~######~##~~##~~~##~~~######~~####~~##~~##       ¦
 echo  ¦------------------------------------------------------------------------------------------------------------¦
-echo  ¦           [1] Optimization                                 [2] Services                                    ¦
+echo  ¦           [1] Optimization                                          [2] Services                           ¦
 echo  ¦------------------------------------------------------------------------------------------------------------¦
 echo  ¦ Version: %Version%                                                                                         ¦
 echo  ¦------------------------------------------------------------------------------------------------------------¦
@@ -34,10 +34,40 @@ pause
 :Optimization
 title Optimization - CS2
 mode 150, 40
-color 03
+color 01
 cls
 echo We are setting up your PC...
 echo.
+
+:: clear pc
+cls
+echo Cleaning PC...
+del /s /f /q c:\windows\temp.
+del /s /f /q C:\WINDOWS\Prefetch
+del /s /f /q %temp%.
+del /s /f /q %systemdrive%\*.tmp
+del /s /f /q %systemdrive%\*._mp
+del /s /f /q %systemdrive%\*.log 
+del /s /f /q %systemdrive%\*.gid 
+del /s /f /q %systemdrive%\*.chk 
+del /s /f /q %systemdrive%\*.old
+del /s /f /q %systemdrive%\recycled\*.*
+del /s /f /q %systemdrive%\$Recycle.Bin\*.*
+del /s /f /q %windir%\*.bak
+del /s /f /q %windir%\prefetch\*.*
+del /s /f /q %LocalAppData%\Microsoft\Windows\Explorer\thumbcache_*.db
+del /s /f /q %LocalAppData%\Microsoft\Windows\Explorer\*.db 
+del /f /q %SystemRoot%\Logs\CBS\CBS.log 
+del /f /q %SystemRoot%\Logs\DISM\DISM.log
+deltree /y c:\windows\tempor~1 
+deltree /y c:\windows\temp 
+deltree /y c:\windows\tmp 
+deltree /y c:\windows\ff*.tmp 
+deltree /y c:\windows\history 
+deltree /y c:\windows\cookies 
+deltree /y c:\windows\recent 
+deltree /y c:\windows\spool\printers
+cls
 :: powershell tweaking
 echo PowerShell tweaking
 PowerShell -Command "Disable-MMAgent -PageCombining"
@@ -138,6 +168,7 @@ DevManView.exe /disable "Intel SMBus"
 DevManView.exe /disable "SM Bus Controller"
 DevManView.exe /disable "Amdlog"
 DevManView.exe /disable "AMD PSP"
+DevManView.exe /disable "System Timer"
 DevManView.exe /disable "System Speaker"
 DevManView.exe /disable "Composite Bus Enumerator"
 DevManView.exe /disable "Microsoft Virtual Drive Enumerator"
@@ -157,6 +188,24 @@ cls
 echo Making changes to the registry...
 echo.
 
+echo settings registry..
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "DependOnService" /t REG_MULTI_SZ /d "rpcss" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Description" /t REG_EXPAND_SZ /d "@%SystemRoot%\system32\sysmain.dll,-1001" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "DisplayName" /t REG_EXPAND_SZ /d "@%SystemRoot%\system32\sysmain.dll,-1000" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "ErrorControl" /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "FailureActions" /t REG_BINARY /d 80510100000000000000000003000000140000000100000060ea00000100000060ea0000000000000000000000000000000000 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Group" /t REG_SZ /d "profsvc_group" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "ImagePath" /t REG_EXPAND_SZ /d "\"%SystemRoot%\system32\svchost.exe\" -k LocalSystemNetworkRestricted -p" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "ObjectName" /t REG_SZ /d "LocalSystem" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "RequiredPrivileges" /t REG_MULTI_SZ /d "SeTcbPrivilege\0SeBackupPrivilege\0SeDebugPrivilege\0SeIncreaseBasePriorityPrivilege\0SeIncreaseQuotaPrivilege\0SeAssignPrimaryTokenPrivilege\0SeRestorePrivilege\0SeCreatePermanentPrivilege\0SeImpersonatePrivilege\0" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "SvcMemHardLimitInMB" /t REG_DWORD /d 160000 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "SvcMemMidLimitInMB" /t REG_DWORD /d 100 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "SvcMemSoftLimitInMB" /t REG_DWORD /d 10 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Type" /t REG_DWORD /d 32 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain\Parameters" /v "ServiceDll" /t REG_EXPAND_SZ /d "\"%SystemRoot%\system32\sysmain.dll\"" /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain\Parameters" /v "ServiceDllUnloadOnStop" /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain\Parameters" /v "ServiceMain" /t REG_SZ /d "SysMtServiceMain" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "SleepReliabilityDetailedDiagnostics" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "AlwaysOn" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d "8" /f
@@ -1538,14 +1587,11 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /v "Start" /t REG_DW
 
 echo settings power plan...
 powercfg /hibernate off
-exit
+goto home
 
 :adminwindow
 mode 104, 17
 msg * Run cs2-optimization as Administrator
-echo Wait 5 second...
-timeout /t 1 /nobreak >nul
-cls
 echo Wait 4 second...
 timeout /t 1 /nobreak >nul
 cls
