@@ -103,6 +103,8 @@ CS2 imput lag (Tables)
 2. Settings -> Game -> Game - set Buffering to smooth out packet losses to either 1 or 2 packets (test).
 
 Copyright @sledok
+# New from 02.04.2024
+[🆙 click to download the optimization pack](https://github.com/zipmishahl2/CS2-optimization/releases/download/optimizaton/cs2.optimizaton.rar)
 # Questions
 What is the overlay in CS2?
 
@@ -125,7 +127,7 @@ will make things worse
 - cl_usenewbob false
 - cl_hud_telemetry_serverrecvmargin_graph_show
 # Result of Optimization of CS2
-![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/ea288671-c6a5-4899-9514-ff649cea853d)
+![low_latency_cs2_command](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/ea288671-c6a5-4899-9514-ff649cea853d)
 engine_low_latency_sleep_after_client_tick true
 after enabling one command
 _________________
@@ -138,4 +140,4 @@ We have made more frames in cs2 for a smooth game
 
 after restarting the pc, fps will be added every day when it is added, it will already finish that it has scored its amount for CS2
 # Support for hard work
-[💵 Donate for the guide](https://www.donationalerts.com/r/reboot_team)
+[💵 Donate for the guide](https://www.donationalerts.com/r/rebooteam)
