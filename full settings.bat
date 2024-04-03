@@ -1636,18 +1636,52 @@ goto home
 
 :services
 echo disabled services windows...
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v Start /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagnosticshub.standardcollector.service" /v Start /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\diagsvc" /v Start /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WbioSrvc" /v Start /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MapsBroker" /v Start /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\lfsvc" /v Start /t REG_DWORD /d 4 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UevAgentService" /v Start /t REG_DWORD /d 4 /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Sense" /v "Start" /t REG_DWORD /d "4" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /v "Start" /t REG_DWORD /d "4" /f
+Set-Service AppVClient -StartupType Disabled
+Set-Service NetTcpPortSharing -StartupType Disabled
+Set-Service CscService -StartupType Disabled
+Set-Service PhoneSvc -StartupType Disabled
+Set-Service Spooler -StartupType Disabled
+Set-Service PrintNotify -StartupType Disabled
+Set-Service QWAVE -StartupType Disabled
+Set-Service RmSvc -StartupType Disabled
+Set-Service RemoteAccess -StartupType Disabled
+Set-Service SensorDataService -StartupType Disabled
+Set-Service SensrSvc -StartupType Disabled
+Set-Service SensorService -StartupType Disabled
+Set-Service ShellHWDetection -StartupType Disabled
+Set-Service SCardSvr -StartupType Disabled
+Set-Service ScDeviceEnum -StartupType Disabled
+Set-Service SSDPSRV -StartupType Disabled
+Set-Service WiaRpc -StartupType Disabled
+Set-Service upnphost -StartupType Disabled
+Set-Service UserDataSvc -StartupType Disabled
+Set-Service UevAgentService -StartupType Disabled
+Set-Service WalletService -StartupType Disabled
+Set-Service FrameServer -StartupType Disabled
+Set-Service stisvc -StartupType Disabled
+Set-Service wisvc -StartupType Disabled
+Set-Service icssvc -StartupType Disabled
+Set-Service WSearch -StartupType Disabled
+Set-Service XblAuthManager -StartupType Disabled
+Set-Service XblGameSave -StartupType Disabled
+Set-Service SEMgrSvc -StartupType Disabled
+Set-Service SysMain -StartupType Disabled
+Set-Service diagnosticshub.standardcollector.service -StartupType Disabled
+Set-Service diagsvc -StartupType Disabled
+Set-Service WbioSrvc -StartupType Disabled
+Set-Service MapsBloker -StartupType Disabled
+Set-Service lfsvc -StartupType Disabled
+Set-Service UevAgentService -StartupType Disabled
+Set-Service WinDefend -StartupType Disabled
+Set-Service SecurityHealthService -StartupType Disabled
+Set-Service WdNisSvc -StartupType Disabled
+Set-Service Sense -StartupType Disabled
+Set-Service wscsvc -StartupType Disabled
+Set-Service AxInstSV -StartupType Disabled
+Set-Service dmwappushservice -StartupType Disabled
+Set-Service SharedAccess -StartupType Disabled
+Set-Service lltdsvc -StartupType Disabled
+
 timeout /t 1 /nobreak >nul
 echo Need a reboot, restart pc now or later?
 echo.
