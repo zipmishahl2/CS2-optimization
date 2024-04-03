@@ -1,5 +1,5 @@
 @echo off
-set Version=2.0
+set Version=2.1
 break off
 color 03
 chcp 65001
@@ -38,7 +38,8 @@ cls
 echo We are setting up your PC...
 echo.
 
-:: Import Power Plan
+:: Import power plan
+echo Import power plan
 curl -g -k -L -# -o "C:\powerplan.pow" "https://cdn.discordapp.com/attachments/1188709163044442164/1225126334280499352/powerplan.pow?ex=661ffecf&is=660d89cf&hm=611b2157dfab7eb643943cfcf7ea9a940742deb7b53e56c36ccde7d2f26e242e&"
 powercfg -import "C:\powerplan.pow" a6df1428-f7b4-4039-89a2-9857401b8c37
 powercfg -setactive a6df1428-f7b4-4039-89a2-9857401b8c37
@@ -212,6 +213,7 @@ echo Making changes to the registry...
 echo.
 
 echo settings registry..
+title full settings registry...
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "TCCSupported" /t REG_DWORD /d "0" /f
 reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_DSEBehavior" /t REG_DWORD /d "0" /f
 reg add "HKCU\SYSTEM\GameConfigStore" /v "GameDVR_FSEBehaviorMode" /t REG_DWORD /d "0" /f
@@ -1472,9 +1474,11 @@ reg delete "HKCU\System\GameConfigStore\Children" /f
 reg delete "HKCU\System\GameConfigStore\Parents" /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
+timeout /t 2 /nobreak > NUL
 timeout /t 1 /nobreak > NUL
 
 echo settings device/usb...
+title settings device/usb
 FOR /f %%a in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr /l "USB\VID_"') do (
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot reg -actn setowner -ownr "n:Administrators"
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot reg -actn ace -ace "n:Administrators;p:full"
@@ -1524,9 +1528,11 @@ for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PC
         )
    )
 )
+timeout /t 2 /nobreak > NUL
 timeout /t 1 /nobreak > NUL
 
 echo schtasks disabled...
+title schtasks disabled...
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator"
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\BthSQM"
@@ -1620,6 +1626,7 @@ schtasks /change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\WindowsColorSystem\Calibration Loader" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchronization" /DISABLE > NUL 2>&1
+timeout /t 2 /nobreak > NUL
 timeout /t 1 /nobreak > NUL
 cls
 echo Need a reboot, restart pc now or later?
@@ -1681,8 +1688,8 @@ Set-Service AxInstSV -StartupType Disabled
 Set-Service dmwappushservice -StartupType Disabled
 Set-Service SharedAccess -StartupType Disabled
 Set-Service lltdsvc -StartupType Disabled
-
-timeout /t 1 /nobreak >nul
+timeout /t 2 /nobreak > NUL
+timeout /t 1 /nobreak > NUL
 echo Need a reboot, restart pc now or later?
 echo.
 echo [1] Reboot pc now?
