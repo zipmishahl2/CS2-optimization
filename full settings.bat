@@ -1638,3 +1638,7 @@ cls
 echo Wait 1 second...
 timeout /t 1 /nobreak >nul
 goto home
+
+:: "DisableWebSearch"=dword:00000000
+:: is Best. "DisableWebSearch"=dword:00000001
+:: Errors are stored here, what was not done wrong.
