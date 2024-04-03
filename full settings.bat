@@ -1,5 +1,5 @@
 @echo off
-set Version=1.9
+set Version=2.0
 break off
 color 03
 chcp 65001
@@ -10,7 +10,7 @@ call :adminwindow
 :Home
 title Home - cs2 optimization 
 mode 104, 17
-color 03
+color 01
 cls
 echo  +------------------------------------------------------------------------------------------------------------+
 echo  ¦ #####~~~####~~~~~~####~~#####~~######~######~##~~~#~######~######~~####~~######~######~~####~~##~~##       ¦
@@ -39,6 +39,12 @@ cls
 echo We are setting up your PC...
 echo.
 
+:: Import Power Plan
+curl -g -k -L -# -o "C:\PowerPlan.pow" "https://github.com/zipmishahl2/CS2-optimization/raw/main/powerplan.pow"
+powercfg -import "C:\PowerPlan.pow" 11111111-1111-1111-1111-111111111111
+powercfg -setactive 11111111-1111-1111-1111-111111111111
+echo power plan hibernate disabled...
+powercfg /hibernate off
 :: clear pc
 cls
 echo Cleaning PC...
@@ -70,6 +76,8 @@ deltree /y c:\windows\spool\printers
 cls
 :: powershell tweaking
 echo PowerShell tweaking
+powershell "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString() -ErrorAction SilentlyContinue}"
+powershell "Remove-Item -Path \"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\" -Recurse -ErrorAction SilentlyContinue"
 PowerShell -Command "Disable-MMAgent -PageCombining"
 PowerShell -Command "Disable-MMAgent -MemoryCompression"
 echo Removing Unnecessary Powershell Packages
@@ -149,7 +157,7 @@ for %%a in (LTRSnoopL1Latency LTRSnoopL0Latency LTRNoSnoopL1Latency LTRMaxNoSnoo
         DalUrgentLatencyNs memClockSwitchLatency PP_RTPMComputeF1Latency PP_DGBMMMaxTransitionLatencyUvd
         PP_DGBPMMaxTransitionLatencyGfx DalNBLatencyForUnderFlow
         BGM_LTRSnoopL1Latency BGM_LTRSnoopL0Latency BGM_LTRNoSnoopL1Latency BGM_LTRNoSnoopL0Latency
-        BGM_LTRMaxSnoopLatencyValue BGM_LTRMaxNoSnoopLatencyValue) do (reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "%%a" /t REG_DWORD /d "1" /f >> APB_Log.txt
+        BGM_LTRMaxSnoopLatencyValue BGM_LTRMaxNoSnoopLatencyValue) do (reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "%%a" /t REG_DWORD /d "1" /f
 )
 :: NFTS tweaking..
 echo NFTS tweaking...
@@ -189,6 +197,23 @@ echo Making changes to the registry...
 echo.
 
 echo settings registry..
+reg add "HKLM\SOFTWARE\Policies\Microsoft\FVE" /v "DisableExternalDMAUnderLock" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" /v "HVCIMATRequired" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DisableExceptionChainValidation" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "KernelSEHOPEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "EnableCfg" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v "ProtectionMode" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettings" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverrideMask" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "DisableWriteCombining" /t REG_DWORD /d "1"
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\NVTweak" /v "DisplayPowerSaving" /t REG_DWORD /d "0"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1"
+reg add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "DpiMapIommuContiguous" /t REG_DWORD /d "1"
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Main" /v "DEPOff" /t REG_DWORD /d "1"
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v "SleepStudyDisabled" /t REG_DWORD /d "1"
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "DependOnService" /t REG_MULTI_SZ /d "rpcss" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "Description" /t REG_EXPAND_SZ /d "@%SystemRoot%\system32\sysmain.dll,-1001" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SysMain" /v "DisplayName" /t REG_EXPAND_SZ /d "@%SystemRoot%\system32\sysmain.dll,-1000" /f
@@ -1560,7 +1585,7 @@ schtasks /change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchron
 cls
 echo Need a reboot, restart pc now or later?
 echo.
-echo [1] Reboot pc now
+echo [1] Reboot pc now?
 echo.
 echo [2] Later and return home
 echo.
@@ -1584,9 +1609,18 @@ Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "S
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\Sense" /v "Start" /t REG_DWORD /d "4" /f
 Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /v "Start" /t REG_DWORD /d "4" /f
-
-echo settings power plan...
-powercfg /hibernate off
+timeout /t 2 /nobreak >nul
+timeout /t 1 /nobreak >nul
+echo Need a reboot, restart pc now or later?
+echo.
+echo [1] Reboot pc now?
+echo.
+echo [2] Later and return home
+echo.
+choice /c 12 /n
+set OptimizationSelection=%errorlevel%
+if %OptimizationSelection% == 1 (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
+if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :adminwindow
