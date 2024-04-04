@@ -1,6 +1,5 @@
 @echo off
 set Version=2.4
-break off
 color 03
 chcp 65001
 cls
