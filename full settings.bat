@@ -1980,5 +1980,5 @@ echo Wait 1 second...
 timeout /t 1 /nobreak >nul
 goto home
 
-:: text..
+:: Microsoft Root driver
 :: Errors are stored here, what was not done wrong.
