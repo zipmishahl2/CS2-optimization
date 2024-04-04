@@ -143,6 +143,17 @@ PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
 Powershell -Command "Get-appxpackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage"
 timeout /t 3 /nobreak > NUL
 
+:: Disable P-States
+echo Disabling P-States
+for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do (
+	for /f "tokens=3" %%a in ('reg query "HKLM\SYSTEM\ControlSet001\Enum\%%i" /v "Driver"') do (
+		for /f %%i in ('echo %%a ^| findstr "{"') do (
+		     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\%%i" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >> APB_Log.txt
+                   )
+                )
+             )        
+timeout /t 3 /nobreak > NUL
+
 :windows10
 cls
 
@@ -186,8 +197,15 @@ del "C:\Windows\System32\mcupdate_GenuineIntel.dll" /s /f /q
 del "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /s /f /q
 timeout /t 1 /nobreak > NUL
 
+
 :NVIDIA
 cls
+
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "RmGpsPsEnablePerCpuCoreDpc" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\NVAPI" /v "RmGpsPsEnablePerCpuCoreDpc" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\NVTweak" /v "RmGpsPsEnablePerCpuCoreDpc" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "RmGpsPsEnablePerCpuCoreDpc" /t REG_DWORD /d "1" /f 
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "RmGpsPsEnablePerCpuCoreDpc" /t REG_DWORD /d "1" /f
 
 :: Disable NVIDIA Telemetry
 echo Disabling NVIDIA Telemetry
@@ -219,6 +237,13 @@ for %%a in (LTRSnoopL1Latency LTRSnoopL0Latency LTRNoSnoopL1Latency LTRMaxNoSnoo
 
 :windows 11
 cls
+
+:: BCD Tweaks
+echo Applying BCD Tweaks
+bcdedit /set useplatformclock No
+bcdedit /seplatformtick No
+bcdedit /set disabledynamictick Yes
+timeout /t 1 /nobreak > NUL
 
 :: NFTS tweaking..
 echo NFTS tweaking...
@@ -1559,14 +1584,6 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 	REG ADD "HKLM\SYSTEM\CurrentControlSet\Enum\%%a\Device Parameters" /F /V "SelectiveSuspendEnabled" /T REG_DWORD /d 0 >NUL 2>&1
 	ECHO Disabling USB idling for %%a
 )
-for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do (
-	for /f "tokens=3" %%a in ('reg query "HKLM\SYSTEM\ControlSet001\Enum\%%i" /v "Driver"') do (
-		for /f %%i in ('echo %%a ^| findstr "{"') do (
-		     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\%%i" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f
-        )
-   )
-)
-timeout /t 2 /nobreak > NUL
 timeout /t 1 /nobreak > NUL
 
 echo schtasks disabled...
