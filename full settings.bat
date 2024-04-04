@@ -1902,6 +1902,9 @@ echo Enabling WH Send and Recieve
 powershell "Get-NetAdapter -IncludeHidden | Set-NetIPInterface -WeakHostSend Enabled -WeakHostReceive Enabled -ErrorAction SilentlyContinue"
 timeout /t 1 /nobreak > NUL
 
+:: Disable NetBIOS
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" /v "NetbiosOptions" /t REG_DWORD /d "2" /f
+timeout /t 1 /nobreak > NUL
 goto home
 
 :gamepriority
