@@ -30,7 +30,8 @@ echo                           %w%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%      
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                         Press function number (1-4)                                                       
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
-echo                                           Version Batch: %Version%                                  
+echo                                           Version Batch: %Version%
+echo                                            Author: jamergamer_mod
 choice /c 12345 /n
 set HomeSelection=%errorlevel%
 if %HomeSelection% == 1 (call :optimization)
