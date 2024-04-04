@@ -45,7 +45,7 @@ powercfg -import "C:\powerplan.pow" a6df1428-f7b4-4039-89a2-9857401b8c37
 powercfg -setactive a6df1428-f7b4-4039-89a2-9857401b8c37
 echo power plan hibernate disabled...
 powercfg /hibernate off
-timeout /t 1 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 
 :: clear pc
 cls
@@ -114,7 +114,7 @@ PowerShell -Command "Get-AppxPackage -allusers *WindowsSoundRecorder* | Remove-A
 PowerShell -Command "Get-AppxPackage -allusers *windowscommunicationsapps* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
 Powershell -Command "Get-appxpackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage"
-timeout /t 1 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 
 :: BCD Tweaks
 echo Applying BCD Tweaks
@@ -146,7 +146,7 @@ bcdedit /set ems No
 bcdedit /set extendedinput Yes
 bcdedit /set debug No
 bcdedit /set hypervisorlaunchtype Off
-timeout /t 1 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 
 :: Disable NVIDIA Telemetry
 echo Disabling NVIDIA Telemetry
@@ -162,7 +162,7 @@ schtasks /change /disable /tn "NvTmRep_CrashReport4_{B2FE1952-0186-46C3-BAEC-A80
 schtasks /change /disable /tn "NvDriverUpdateCheckDaily_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /disable /tn "NVIDIA GeForce Experience SelfUpdate_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /disable /tn "NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
-timeout /t 1 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 
 :: NFTS tweaking..
 echo NFTS tweaking...
@@ -171,7 +171,7 @@ fsutil behavior set mftzone 4
 fsutil behavior set disablelastaccess 1
 fsutil behavior set disabledeletenotify 0
 fsutil behavior set encryptpagingfile 0
-timeout /t 1 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 :: device manager settings
 curl -g -k -L -# -o "C:\Windows\System32\DevManView.exe" "https://github.com/zipmishahl2/CS2-optimization/raw/main/DevManView.exe"
 DevManView.exe /disable "High Precision Event Timer"
@@ -198,13 +198,17 @@ DevManView.exe /disable "WAN Miniport (PPPOE)"
 DevManView.exe /disable "WAN Miniport (PPTP)"
 DevManView.exe /disable "WAN Miniport (SSTP)"
 DevManView.exe /disable "WAN Miniport (Network Monitor)"
-timeout /t 1 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 cls
 echo Making changes to the registry...
 echo.
 
 echo settings registry..
 title full settings registry...
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PerfLevelSrc" /t REG_DWORD /d "2222" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PowerMizerEnable" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PowerMizerLevel" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PowerMizerLevelAC" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "TCCSupported" /t REG_DWORD /d "0" /f 
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f
@@ -296,14 +300,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "Latenc
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "MaxIAverageGraphicsLatencyInOneBucket" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "MiracastPerfTrackGraphicsLatency" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "TransitionLatency" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\USB" /v "DisableSelectiveSuspend" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d "0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d "0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d "0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d "0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d "0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWebOverMeteredConnections" /t REG_DWORD /d "0" /f 
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power" /v "SleepReliabilityDetailedDiagnostics" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\AppModel" /v "Start" /t REG_DWORD /d "0" /f 
