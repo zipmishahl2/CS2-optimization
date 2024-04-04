@@ -1,5 +1,5 @@
 @echo off
-set Version=2.3
+set Version=2.4
 break off
 color 03
 chcp 65001
@@ -30,6 +30,37 @@ if %HomeSelection% == 1 (call :optimization)
 if %HomeSelection% == 2 (call :services)
 pause
 
+set z=[7m
+set i=[1m
+set q=[0m
+echo %z%Are you on Windows 10 or 11?%q%
+echo.
+echo %i%Windows 10 = 1%q%
+echo.
+echo %i%Windows 11 = 2%q%
+echo.
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto Windows10
+if '%choice%'=='2' goto Windows11
+
+cls
+set z=[7m
+set i=[1m
+set q=[0m
+echo %z%What GPU Do you Have?%q%
+echo.
+echo %i%NVIDIA = 1%q%
+echo.
+echo %i%AMD = 2%q%
+echo.
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto NVIDIA
+if '%choice%'=='2' goto AMD
+
 :Optimization
 title PC OPTIMIZATION
 mode 150, 40
@@ -50,10 +81,6 @@ timeout /t 3 /nobreak > NUL
 :: clear pc
 cls
 echo Cleaning PC...
-takeown /f "C:\Windows\System32\mcupdate_GenuineIntel.dll" /r /d y
-takeown /f "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /r /d y
-del "C:\Windows\System32\mcupdate_GenuineIntel.dll" /s /f /q
-del "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /s /f /q
 del /s /f /q c:\windows\temp.
 del /s /f /q C:\WINDOWS\Prefetch
 del /s /f /q %temp%.
@@ -116,6 +143,9 @@ PowerShell -Command "Get-AppxPackage -allusers *zune* | Remove-AppxPackage"
 Powershell -Command "Get-appxpackage -allusers *Microsoft.549981C3F5F10* | Remove-AppxPackage"
 timeout /t 3 /nobreak > NUL
 
+:windows10
+cls
+
 :: BCD Tweaks
 echo Applying BCD Tweaks
 bcdedit /set useplatformclock No
@@ -148,6 +178,17 @@ bcdedit /set debug No
 bcdedit /set hypervisorlaunchtype Off
 timeout /t 3 /nobreak > NUL
 
+:: delete microCode
+echo Deleting Microcode
+takeown /f "C:\Windows\System32\mcupdate_GenuineIntel.dll" /r /d y
+takeown /f "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /r /d y
+del "C:\Windows\System32\mcupdate_GenuineIntel.dll" /s /f /q
+del "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /s /f /q
+timeout /t 1 /nobreak > NUL
+
+:NVIDIA
+cls
+
 :: Disable NVIDIA Telemetry
 echo Disabling NVIDIA Telemetry
 reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "NvBackend" /f
@@ -164,6 +205,21 @@ schtasks /change /disable /tn "NVIDIA GeForce Experience SelfUpdate_{B2FE1952-01
 schtasks /change /disable /tn "NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 timeout /t 3 /nobreak > NUL
 
+:AMD
+cls
+
+:: AMD Tweaks
+echo Applying AMD Tweaks
+for %%a in (LTRSnoopL1Latency LTRSnoopL0Latency LTRNoSnoopL1Latency LTRMaxNoSnoopLatency KMD_RpmComputeLatency
+        DalUrgentLatencyNs memClockSwitchLatency PP_RTPMComputeF1Latency PP_DGBMMMaxTransitionLatencyUvd
+        PP_DGBPMMaxTransitionLatencyGfx DalNBLatencyForUnderFlow
+        BGM_LTRSnoopL1Latency BGM_LTRSnoopL0Latency BGM_LTRNoSnoopL1Latency BGM_LTRNoSnoopL0Latency
+        BGM_LTRMaxSnoopLatencyValue BGM_LTRMaxNoSnoopLatencyValue) do (reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "%%a" /t REG_DWORD /d "1" /f
+)
+
+:windows 11
+cls
+
 :: NFTS tweaking..
 echo NFTS tweaking...
 fsutil behavior set memoryusage 2
@@ -172,6 +228,7 @@ fsutil behavior set disablelastaccess 1
 fsutil behavior set disabledeletenotify 0
 fsutil behavior set encryptpagingfile 0
 timeout /t 3 /nobreak > NUL
+
 :: device manager settings
 curl -g -k -L -# -o "C:\Windows\System32\DevManView.exe" "https://github.com/zipmishahl2/CS2-optimization/raw/main/DevManView.exe"
 DevManView.exe /disable "High Precision Event Timer"
@@ -237,7 +294,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t REG_DWORD /d "3" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverrideMask" /t REG_DWORD /d "3" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "DisableWriteCombining" /t REG_DWORD /d "1"
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\NVTweak" /v "DisplayPowerSaving" /t REG_DWORD /d "0"
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\NVTweak" /v "DisplayPowerSaving" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" /v "DistributeTimers" /t REG_DWORD /d "1"
 reg add "HKLM\SOFTWARE\Microsoft\FTH" /v "Enabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "DpiMapIommuContiguous" /t REG_DWORD /d "1"
