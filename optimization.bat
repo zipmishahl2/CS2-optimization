@@ -1701,6 +1701,11 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :network
+title network settings
+ipconfig /release
+ipconfig /renew
+ipconfig /flushdns
+
 echo Configuring Sock Address Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MaxSockAddrLength" /t REG_DWORD /d "16" /f
