@@ -1926,7 +1926,7 @@ if '%choice%'=='3' goto fortnite
 :cs2
 cls
 title priority cs2..
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cs2.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cs2.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f
 echo Wait 2 second...
 timeout /t 1 /nobreak >nul
 cls
@@ -1937,7 +1937,7 @@ goto home
 :valorant
 cls
 title priority valorant..
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\VALORANT.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\VALORANT.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f
 echo Wait 2 second...
 timeout /t 1 /nobreak >nul
 cls
@@ -1959,7 +1959,7 @@ goto home
 
 :adminwindow
 mode 104, 17
-msg * Run cs2-optimization as Administrator
+msg * Run pc-optimization as Administrator
 echo Wait 4 second...
 timeout /t 1 /nobreak >nul
 cls
@@ -1975,9 +1975,3 @@ goto home
 
 :: Microsoft Root driver
 :: Errors are stored here, what was not done wrong.
-:: check how KBoost works
-:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "PerfLevelSrc" REG_DWORD "2222"
-:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "PowerMizerEnable" REG_DWORD "0"
-:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "PowerMizerLevel" REG_DWORD "0"
-:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "PowerMizerLevelAC" REG_DWORD "0"
-:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "TCCSupported" REG_DWORD "0"
