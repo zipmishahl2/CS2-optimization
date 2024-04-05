@@ -23,14 +23,15 @@ echo                     ║╚═╝║║║─────║║║║║╚�
 echo                     ║╔══╝║║─────║║║║║╔══╝──║║───║║─║╔╗╔╗║─║║─╔╝╔╝─║╔╗║──║║───║║─║║║║║║╚╗║
 echo                     ║║───║╚═╗───║╚╝║║║─────║║──╔╝╚╗║║╚╝║║╔╝╚╗║─╚═╗║║║║──║║──╔╝╚╗║╚╝║║║─║║
 echo                     ╚╝───╚══╝───╚══╝╚╝─────╚╝──╚══╝╚╝──╚╝╚══╝╚═══╝╚╝╚╝──╚╝──╚══╝╚══╝╚╝─╚╝
-echo      %w%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                 %w%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
+echo                           %w%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                 %w%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
 echo. 
 echo.
-echo      %w%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                      %w%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%
+echo                           %w%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %w%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                         Press function number (1-4)                                                       
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                           Version Batch: %Version%
+echo                                            Author: jamergamer_mod
 choice /c 12345 /n
 set HomeSelection=%errorlevel%
 if %HomeSelection% == 1 (call :optimization)
@@ -1701,11 +1702,6 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :network
-title network settings
-ipconfig /release
-ipconfig /renew
-ipconfig /flushdns
-
 echo Configuring Sock Address Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MaxSockAddrLength" /t REG_DWORD /d "16" /f
