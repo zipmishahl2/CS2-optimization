@@ -31,11 +31,12 @@ echo %w%════════════════════════
 echo                                         Press function number (1-4)                                                       
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                           Version Batch: %Version%
-echo                                            Author: jamergamer_mod
 choice /c 12345 /n
 set HomeSelection=%errorlevel%
 if %HomeSelection% == 1 (call :optimization)
 if %HomeSelection% == 2 (call :services)
+if %HomeSelection% == 3 (call :network)
+if %HomeSelection% == 4 (call :gamepriority)
 pause
 
 :Optimization
