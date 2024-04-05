@@ -23,15 +23,14 @@ echo                     ║╚═╝║║║─────║║║║║╚�
 echo                     ║╔══╝║║─────║║║║║╔══╝──║║───║║─║╔╗╔╗║─║║─╔╝╔╝─║╔╗║──║║───║║─║║║║║║╚╗║
 echo                     ║║───║╚═╗───║╚╝║║║─────║║──╔╝╚╗║║╚╝║║╔╝╚╗║─╚═╗║║║║──║║──╔╝╚╗║╚╝║║║─║║
 echo                     ╚╝───╚══╝───╚══╝╚╝─────╚╝──╚══╝╚╝──╚╝╚══╝╚═══╝╚╝╚╝──╚╝──╚══╝╚══╝╚╝─╚╝
-echo                           %w%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                 %w%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
+echo      %w%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                 %w%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
 echo. 
 echo.
-echo                           %w%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %w%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%
+echo      %w%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                      %w%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                         Press function number (1-4)                                                       
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                           Version Batch: %Version%
-echo                                            Author: jamergamer_mod
 choice /c 12345 /n
 set HomeSelection=%errorlevel%
 if %HomeSelection% == 1 (call :optimization)
