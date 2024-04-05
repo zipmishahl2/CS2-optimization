@@ -38,37 +38,6 @@ if %HomeSelection% == 1 (call :optimization)
 if %HomeSelection% == 2 (call :services)
 pause
 
-set z=[7m
-set i=[1m
-set q=[0m
-echo %z%Are you on Windows 10 or 11?%q%
-echo.
-echo %i%Windows 10 = 1%q%
-echo.
-echo %i%Windows 11 = 2%q%
-echo.
-set choice=
-set /p choice=
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto Windows10
-if '%choice%'=='2' goto Windows11
-
-cls
-set z=[7m
-set i=[1m
-set q=[0m
-echo %z%What GPU Do you Have?%q%
-echo.
-echo %i%NVIDIA = 1%q%
-echo.
-echo %i%AMD = 2%q%
-echo.
-set choice=
-set /p choice=
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto NVIDIA
-if '%choice%'=='2' goto AMD
-
 :Optimization
 title PC OPTIMIZATION
 color 03
@@ -161,9 +130,6 @@ for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PC
              )        
 timeout /t 3 /nobreak > NUL
 
-:windows10
-cls
-
 :: BCD Tweaks
 echo Applying BCD Tweaks
 bcdedit /set useplatformclock No
@@ -204,10 +170,6 @@ del "C:\Windows\System32\mcupdate_GenuineIntel.dll" /s /f /q
 del "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /s /f /q
 timeout /t 1 /nobreak > NUL
 
-
-:NVIDIA
-cls
-
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm" /v "RmGpsPsEnablePerCpuCoreDpc" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\NVAPI" /v "RmGpsPsEnablePerCpuCoreDpc" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\NVTweak" /v "RmGpsPsEnablePerCpuCoreDpc" /t REG_DWORD /d "1" /f
@@ -230,9 +192,6 @@ schtasks /change /disable /tn "NVIDIA GeForce Experience SelfUpdate_{B2FE1952-01
 schtasks /change /disable /tn "NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 timeout /t 3 /nobreak > NUL
 
-:AMD
-cls
-
 :: AMD Tweaks
 echo Applying AMD Tweaks
 for %%a in (LTRSnoopL1Latency LTRSnoopL0Latency LTRNoSnoopL1Latency LTRMaxNoSnoopLatency KMD_RpmComputeLatency
@@ -241,16 +200,6 @@ for %%a in (LTRSnoopL1Latency LTRSnoopL0Latency LTRNoSnoopL1Latency LTRMaxNoSnoo
         BGM_LTRSnoopL1Latency BGM_LTRSnoopL0Latency BGM_LTRNoSnoopL1Latency BGM_LTRNoSnoopL0Latency
         BGM_LTRMaxSnoopLatencyValue BGM_LTRMaxNoSnoopLatencyValue) do (reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "%%a" /t REG_DWORD /d "1" /f
 )
-
-:windows 11
-cls
-
-:: BCD Tweaks
-echo Applying BCD Tweaks
-bcdedit /set useplatformclock No
-bcdedit /seplatformtick No
-bcdedit /set disabledynamictick Yes
-timeout /t 1 /nobreak > NUL
 
 :: NFTS tweaking..
 echo NFTS tweaking...
