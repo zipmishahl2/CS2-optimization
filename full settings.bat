@@ -294,11 +294,6 @@ echo.
 
 echo settings registry..
 title full settings registry...
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PerfLevelSrc" /t REG_DWORD /d "2222" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PowerMizerEnable" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PowerMizerLevel" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "PowerMizerLevelAC" /t REG_DWORD /d "0" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "TCCSupported" /t REG_DWORD /d "0" /f 
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-314559Enabled" /t REG_DWORD /d "0" /f
@@ -1905,7 +1900,8 @@ timeout /t 1 /nobreak > NUL
 
 :: Disable NetBIOS
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" /v "NetbiosOptions" /t REG_DWORD /d "2" /f
-timeout /t 1 /nobreak > NUL
+echo let's return home..
+timeout /t 3 /nobreak > NUL
 goto home
 
 :gamepriority
@@ -1931,7 +1927,6 @@ if '%choice%'=='3' goto fortnite
 cls
 title priority cs2..
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cs2.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
-echo Time to drag in the game!
 echo Wait 2 second...
 timeout /t 1 /nobreak >nul
 cls
@@ -1943,7 +1938,6 @@ goto home
 cls
 title priority valorant..
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\VALORANT.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
-echo Time to drag in the game!
 echo Wait 2 second...
 timeout /t 1 /nobreak >nul
 cls
@@ -1956,7 +1950,6 @@ cls
 title priority fortnite..
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\fortnite.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe" /v "CpuPriorityClass" /t REG_DWORD /d "3" /f
-echo Time to drag in the game!
 echo Wait 2 second...
 timeout /t 1 /nobreak >nul
 cls
@@ -1982,3 +1975,9 @@ goto home
 
 :: Microsoft Root driver
 :: Errors are stored here, what was not done wrong.
+:: check how KBoost works
+:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "PerfLevelSrc" REG_DWORD "2222"
+:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "PowerMizerEnable" REG_DWORD "0"
+:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "PowerMizerLevel" REG_DWORD "0"
+:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "PowerMizerLevelAC" REG_DWORD "0"
+:: "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" "TCCSupported" REG_DWORD "0"
