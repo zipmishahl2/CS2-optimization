@@ -128,7 +128,6 @@ for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PC
                    )
                 )
              )        
-timeout /t 3 /nobreak > NUL
 
 :: BCD Tweaks
 echo Applying BCD Tweaks
@@ -190,7 +189,6 @@ schtasks /change /disable /tn "NvTmRep_CrashReport4_{B2FE1952-0186-46C3-BAEC-A80
 schtasks /change /disable /tn "NvDriverUpdateCheckDaily_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /disable /tn "NVIDIA GeForce Experience SelfUpdate_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /disable /tn "NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
-timeout /t 3 /nobreak > NUL
 
 :: AMD Tweaks
 echo Applying AMD Tweaks
@@ -236,13 +234,11 @@ DevManView.exe /disable "WAN Miniport (PPPOE)"
 DevManView.exe /disable "WAN Miniport (PPTP)"
 DevManView.exe /disable "WAN Miniport (SSTP)"
 DevManView.exe /disable "WAN Miniport (Network Monitor)"
-timeout /t 3 /nobreak > NUL
 cls
-echo Making changes to the registry...
 echo.
 
-echo settings registry..
-title full settings registry...
+echo Making changes to the registry...
+title Making changes to the registry...
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-314559Enabled" /t REG_DWORD /d "0" /f
@@ -1488,8 +1484,6 @@ reg delete "HKCU\System\GameConfigStore\Children" /f
 reg delete "HKCU\System\GameConfigStore\Parents" /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d 0 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
-timeout /t 2 /nobreak > NUL
-timeout /t 1 /nobreak > NUL
 
 echo settings device/usb...
 title settings device/usb
@@ -1632,7 +1626,6 @@ schtasks /change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /DISABLE
 schtasks /change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\WindowsColorSystem\Calibration Loader" /DISABLE > NUL 2>&1
 schtasks /change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchronization" /DISABLE > NUL 2>&1
-timeout /t 2 /nobreak > NUL
 timeout /t 1 /nobreak > NUL
 cls
 echo Need a reboot, restart pc now or later?
@@ -1709,7 +1702,6 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :network
-:: Adjust Sock Address Size
 echo Configuring Sock Address Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MaxSockAddrLength" /t REG_DWORD /d "16" /f
@@ -1921,6 +1913,3 @@ cls
 echo Wait 1 second...
 timeout /t 1 /nobreak >nul
 goto home
-
-:: Microsoft Root driver
-:: Errors are stored here, what was not done wrong.
