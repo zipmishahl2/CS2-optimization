@@ -6,6 +6,46 @@ cls
 md C:\pc-optimization
 call :adminwindow
 
+:Home
+title Home - PC OPTIMIZATION
+chcp 65001 >nul 2>&1
+color 03
+cls
+set c=[33m
+set t=[0m
+set w=[95m
+set y=[0m
+set u=[4m
+set q=[0m
+echo                          %w%╔═══╗╔══╗───╔══╗╔═══╗╔════╗╔══╗╔╗──╔╗╔══╗╔═══╗╔══╗╔════╗╔══╗╔══╗╔╗─╔╗%w%
+echo                          %w%║╔═╗║║╔═╝───║╔╗║║╔═╗║╚═╗╔═╝╚╗╔╝║║──║║╚╗╔╝╚═╗─║║╔╗║╚═╗╔═╝╚╗╔╝║╔╗║║╚═╝║%w%
+echo                          %w%║╚═╝║║║─────║║║║║╚═╝║──║║───║║─║╚╗╔╝║─║║──╔╝╔╝║╚╝║──║║───║║─║║║║║╔╗─║%w%
+echo                          %w%║╔══╝║║─────║║║║║╔══╝──║║───║║─║╔╗╔╗║─║║─╔╝╔╝─║╔╗║──║║───║║─║║║║║║╚╗║%w%
+echo                          %w%║║───║╚═╗───║╚╝║║║─────║║──╔╝╚╗║║╚╝║║╔╝╚╗║─╚═╗║║║║──║║──╔╝╚╗║╚╝║║║─║║%w%
+echo                          %w%╚╝───╚══╝───╚══╝╚╝─────╚╝──╚══╝╚╝──╚╝╚══╝╚═══╝╚╝╚╝──╚╝──╚══╝╚══╝╚╝─╚╝%w%
+echo                           %w%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %w%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
+echo. 
+echo.
+echo                           %w%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %w%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%
+echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
+echo                                         Press function number (1-4)                                                       
+echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
+echo                                           Version Batch: %Version%
+choice /c 12345 /n
+set HomeSelection=%errorlevel%
+if %HomeSelection% == 1 (call :optimization)
+if %HomeSelection% == 2 (call :services)
+if %HomeSelection% == 3 (call :network)
+if %HomeSelection% == 4 (call :gamepriority)
+pause
+
+:Optimization
+title PC OPTIMIZATION
+color 03
+cls
+echo We are setting up your PC...
+echo.
+
 :: Import power plan
 echo Import power plan
 curl -g -k -L -# -o "C:\powerplan.pow" "https://cdn.discordapp.com/attachments/1188709163044442164/1225126334280499352/powerplan.pow?ex=661ffecf&is=660d89cf&hm=611b2157dfab7eb643943cfcf7ea9a940742deb7b53e56c36ccde7d2f26e242e&"
@@ -1934,6 +1974,19 @@ schtasks /change /TN "Microsoft\Windows\WindowsColorSystem\Calibration Loader" /
 schtasks /change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchronization" /DISABLE > NUL 2>&1
 timeout /t 1 /nobreak > NUL
 cls
+echo Need a reboot, restart pc now or later?
+echo.
+echo [1] Reboot pc now?
+echo.
+echo [2] Later and return home
+echo.
+choice /c 12 /n
+set OptimizationSelection=%errorlevel%
+if %OptimizationSelection% == 1 (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
+if %OptimizationSelection% == 2 (goto home)
+goto home
+
+:services
 
 echo disabled services windows...
 Powershell Set-Service AppVClient -StartupType Disabled
@@ -1992,6 +2045,218 @@ echo.
 choice /c 12 /n
 set OptimizationSelection=%errorlevel%
 if %OptimizationSelection% == 1 (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
-if %OptimizationSelection% == 2 (goto exit)
+if %OptimizationSelection% == 2 (goto home)
+goto home
 
-exit
+:network
+
+echo Configuring Sock Address Size
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MaxSockAddrLength" /t REG_DWORD /d "16" /f
+timeout /t 1 /nobreak > NUL
+
+:: Disable Nagle's Algorithm
+echo Disabling Nagle's Algorithm
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" /v "TcpAckFrequency" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" /v "TCPNoDelay" /t REG_DWORD /d "1" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" /v "TcpDelAckTicks" /t REG_DWORD /d "0" /f
+timeout /t 1 /nobreak > NUL
+
+:: Disable Delivery Optimization
+echo Disabling Delivery Optimization
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v "DODownloadMode" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v "DownloadMode" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Settings" /v "DownloadMode" /t REG_DWORD /d "0" /f
+timeout /t 1 /nobreak > NUL
+
+:: Limit Number of SMB Sessions
+echo Limiting SMB Sessions
+reg add "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v "Size" /t REG_DWORD /d "3" /f
+timeout /t 1 /nobreak > NUL
+
+:: Disable Oplocks
+echo Disabling Oplocks
+reg add "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v "EnableOplocks" /t REG_DWORD /d "0" /f
+timeout /t 1 /nobreak > NUL
+
+:: Set IRP Stack Size
+echo Setting IRP Stack Size
+reg add "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v "IRPStackSize" /t REG_DWORD /d "20" /f
+timeout /t 1 /nobreak > NUL
+
+:: Disable Sharing Violations
+echo Disabling Sharing Violations
+reg add "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v "SharingViolationDelay" /t REG_DWORD /d "0" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v "SharingViolationRetries" /t REG_DWORD /d "0" /f
+timeout /t 1 /nobreak > NUL
+
+:: Get the Sub ID of the Network Adapter
+for /f %%n in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4D36E972-E325-11CE-BFC1-08002bE10318}" /v "*SpeedDuplex" /s ^| findstr  "HKEY"') do (
+
+:: Disable NIC Power Savings
+echo Disabling NIC Power Savings
+reg add "%%n" /v "AutoPowerSaveModeEnabled" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "AutoDisableGigabit" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "AdvancedEEE" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "DisableDelayedPowerUp" /t REG_SZ /d "2" /f 
+reg add "%%n" /v "*EEE" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "EEE" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "EnablePME" /t REG_SZ /d "0" /f
+reg add "%%n" /v "EEELinkAdvertisement" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "EnableGreenEthernet" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "EnableSavePowerNow" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "EnablePowerManagement" /t REG_SZ /d "0" /f
+reg add "%%n" /v "EnableDynamicPowerGating" /t REG_SZ /d "0" /f
+reg add "%%n" /v "EnableConnectedPowerGating" /t REG_SZ /d "0" /f
+reg add "%%n" /v "EnableWakeOnLan" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "GigaLite" /t REG_SZ /d "0" /f
+reg add "%%n" /v "NicAutoPowerSaver" /t REG_SZ /d "2" /f 
+reg add "%%n" /v "PowerDownPll" /t REG_SZ /d "0" /f
+reg add "%%n" /v "PowerSavingMode" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "ReduceSpeedOnPowerDown" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "SmartPowerDownEnable" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "S5NicKeepOverrideMacAddrV2" /t REG_SZ /d "0" /f
+reg add "%%n" /v "S5WakeOnLan" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "ULPMode" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "WakeOnDisconnect" /t REG_SZ /d "0" /f
+reg add "%%n" /v "*WakeOnMagicPacket" /t REG_SZ /d "0" /f
+reg add "%%n" /v "*WakeOnPattern" /t REG_SZ /d "0" /f
+reg add "%%n" /v "WakeOnLink" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "WolShutdownLinkSpeed" /t REG_SZ /d "2" /f
+timeout /t 1 /nobreak > NUL
+
+:: Disable Jumbo Frame
+echo Disabling Jumbo Frame
+reg add "%%n" /v "JumboPacket" /t REG_SZ /d "1514" /f
+timeout /t 1 /nobreak > NUL
+
+:: Configure Receive/Transmit Buffers
+echo Configuring Buffer Sizes
+reg add "%%n" /v "TransmitBuffers" /t REG_SZ /d "4096" /f
+reg add "%%n" /v "ReceiveBuffers" /t REG_SZ /d "512" /f
+timeout /t 1 /nobreak > NUL
+
+:: Configure Offloads
+echo Configuring Offloads
+reg add "%%n" /v "IPChecksumOffloadIPv4" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "LsoV1IPv4" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "LsoV2IPv4" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "LsoV2IPv6" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "PMARPOffload" /t REG_SZ /d "0" /f
+reg add "%%n" /v "PMNSOffload" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "TCPChecksumOffloadIPv4" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "TCPChecksumOffloadIPv6" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "UDPChecksumOffloadIPv6" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "UDPChecksumOffloadIPv4" /t REG_SZ /d "0" /f 
+timeout /t 1 /nobreak > NUL
+
+:: Enable RSS in NIC
+echo Enabling RSS in NIC
+reg add "%%n" /v "RSS" /t REG_SZ /d "1" /f
+reg add "%%n" /v "*NumRssQueues" /t REG_SZ /d "2" /f
+reg add "%%n" /v "RSSProfile" /t REG_SZ /d "3" /f
+timeout /t 1 /nobreak > NUL
+
+:: Disable Flow Control
+echo Disabling Flow Control
+reg add "%%n" /v "*FlowControl" /t REG_SZ /d "0" /f
+reg add "%%n" /v "FlowControlCap" /t REG_SZ /d "0" /f
+timeout /t 1 /nobreak > NUL
+
+:: Remove Interrupt Delays
+echo Removing Interrupt Delays
+reg add "%%n" /v "TxIntDelay" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "TxAbsIntDelay" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "RxIntDelay" /t REG_SZ /d "0" /f 
+reg add "%%n" /v "RxAbsIntDelay" /t REG_SZ /d "0" /f
+timeout /t 1 /nobreak > NUL
+
+:: Remove Adapter Notification
+echo Removing Adapter Notification Sending
+reg add "%%n" /v "FatChannelIntolerant" /t REG_SZ /d "0" /f
+timeout /t 1 /nobreak > NUL
+
+:: Disable Interrupt Moderation
+echo Disabling Interrupt Moderation
+reg add "%%n" /v "*InterruptModeration" /t REG_SZ /d "0" /f
+timeout /t 1 /nobreak > NUL
+)
+
+:: Enable WeakHost Send and Recieve
+echo Enabling WH Send and Recieve
+powershell "Get-NetAdapter -IncludeHidden | Set-NetIPInterface -WeakHostSend Enabled -WeakHostReceive Enabled -ErrorAction SilentlyContinue"
+timeout /t 1 /nobreak > NUL
+
+:: Disable NetBIOS
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters" /v "NetbiosOptions" /t REG_DWORD /d "2" /f
+echo let's return home..
+timeout /t 3 /nobreak > NUL
+goto home
+
+:gamepriority
+set z=[7m
+set i=[1m
+set q=[0m
+echo %z%Are you on cs2, valorant fortnite?%q%
+echo.
+echo %i%cs2 = 1%q%
+echo.
+echo %i%valorant = 2%q%
+echo.
+echo %i%fortnite = 3%q%
+echo.
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto cs2
+if '%choice%'=='2' goto valorant
+if '%choice%'=='3' goto fortnite
+
+:cs2
+cls
+title priority cs2..
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cs2.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
+echo Wait 2 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 1 second...
+timeout /t 1 /nobreak >nul
+goto home
+
+:valorant
+cls
+title priority valorant..
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\VALORANT.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
+echo Wait 2 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 1 second...
+timeout /t 1 /nobreak >nul
+goto home
+
+:fortnite
+cls
+title priority fortnite..
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
+echo Wait 2 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 1 second...
+timeout /t 1 /nobreak >nul
+goto home
+
+:adminwindow
+mode 104, 17
+msg * Run pc-optimization as Administrator
+echo Wait 4 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 3 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 2 second...
+timeout /t 1 /nobreak >nul
+cls
+echo Wait 1 second...
+timeout /t 1 /nobreak >nul
+goto home
