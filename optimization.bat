@@ -30,7 +30,7 @@ echo                           %w%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%      
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                         Press function number (1-4)                                                       
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
-echo                                       We recommend these Windows: AtlasOS
+echo                We recommend these Windows: AtlasOS. how to install atlasOS immediately apply the points on services and optimization (boost 5%)
 echo                                           Version Batch: %Version%
 choice /c 12345 /n
 set HomeSelection=%errorlevel%
@@ -87,7 +87,7 @@ deltree /y c:\windows\spool\printers
 cls
 
 :: powershell tweaking
-echo PowerShell tweaking
+echo cleaning Windows from trash
 powershell "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString() -ErrorAction SilentlyContinue}"
 powershell "Remove-Item -Path \"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\" -Recurse -ErrorAction SilentlyContinue"
 PowerShell -Command "Disable-MMAgent -PageCombining"
