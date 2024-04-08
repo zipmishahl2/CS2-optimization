@@ -23,13 +23,14 @@ echo                     ║╚═╝║║║─────║║║║║╚�
 echo                     ║╔══╝║║─────║║║║║╔══╝──║║───║║─║╔╗╔╗║─║║─╔╝╔╝─║╔╗║──║║───║║─║║║║║║╚╗║
 echo                     ║║───║╚═╗───║╚╝║║║─────║║──╔╝╚╗║║╚╝║║╔╝╚╗║─╚═╗║║║║──║║──╔╝╚╗║╚╝║║║─║║
 echo                     ╚╝───╚══╝───╚══╝╚╝─────╚╝──╚══╝╚╝──╚╝╚══╝╚═══╝╚╝╚╝──╚╝──╚══╝╚══╝╚╝─╚╝
-echo                           %w%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                 %w%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
+echo                           %w%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %w%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
 echo. 
 echo.
 echo                           %w%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %w%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                         Press function number (1-4)                                                       
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
+echo                                       We recommend these Windows: AtlasOS
 echo                                           Version Batch: %Version%
 choice /c 12345 /n
 set HomeSelection=%errorlevel%
@@ -125,10 +126,28 @@ echo Disabling P-States
 for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PCI\VEN_"') do (
 	for /f "tokens=3" %%a in ('reg query "HKLM\SYSTEM\ControlSet001\Enum\%%i" /v "Driver"') do (
 		for /f %%i in ('echo %%a ^| findstr "{"') do (
-		     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\%%i" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f >> APB_Log.txt
-                   )
-                )
-             )        
+		     reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\%%i" /v "DisableDynamicPstate" /t REG_DWORD /d "1" /f
+    )
+  )
+)        
+timeout /t 3 /nobreak > NUL
+
+set z=[7m
+set i=[1m
+set q=[0m
+echo %z%Are you on Windows 10 or 11?%q%
+echo.
+echo %i%Windows 10 = 1%q%
+echo.
+echo %i%Windows 11 = 2%q%
+echo.
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto win10
+if '%choice%'=='2' goto win11
+
+:win10
 
 :: BCD Tweaks
 echo Applying BCD Tweaks
@@ -179,6 +198,24 @@ del "C:\Windows\System32\mcupdate_GenuineIntel.dll" /s /f /q
 del "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /s /f /q
 timeout /t 1 /nobreak > NUL
 
+:win11
+
+: BCD Tweaks
+echo Applying BCD Tweaks
+bcdedit /set useplatformclock No
+bcdedit /seplatformtick No
+bcdedit /set disabledynamictick Yes
+timeout /t 1 /nobreak > NUL
+
+:: NTFS Tweaks
+echo Applying NTFS Tweaks
+fsutil behavior set memoryusage 2
+fsutil behavior set mftzone 4
+fsutil behavior set disablelastaccess 1
+fsutil behavior set disabledeletenotify 0
+fsutil behavior set encryptpagingfile 0
+timeout /t 1 /nobreak > NUL
+
 cls
 set z=[7m
 set i=[1m
@@ -206,6 +243,14 @@ powershell -NoProfile Expand-Archive '%temp%\nvidiaProfileInspector.zip' -Destin
 curl -g -k -L -# -o "C:\NvidiaProfileInspector\optimization.nip" "https://cdn.discordapp.com/attachments/1225846086111854706/1226834098178490388/optimization.nip?ex=6626354a&is=6613c04a&hm=7280f54843bcd1878dbf65a87382b21cafa138cba5c43db723dfe8c4dac08106&"
 start "" /wait "C:\NvidiaProfileInspector\nvidiaProfileInspector.exe" "C:\NvidiaProfileInspector\optimization.nip"
 timeout /t 3 /nobreak > NUL
+
+:: Enable MSI Mode for GPU
+echo Enabling MSI Mode
+for /f %%g in ('wmic path win32_videocontroller get PNPDeviceID ^| findstr /L "VEN_"') do (
+reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%g\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MSISupported" /t REG_DWORD /d "1" /f 
+reg add "HKLM\SYSTEM\CurrentControlSet\Enum\%%g\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePriority" /t REG_DWORD /d "0" /f
+)
+timeout /t 1 /nobreak > NUL
 
 :: NVIDIA Latency Tolerance
 echo Setting NVIDIA Latency Tolerance
@@ -413,6 +458,7 @@ for %%a in (LTRSnoopL1Latency LTRSnoopL0Latency LTRNoSnoopL1Latency LTRMaxNoSnoo
         BGM_LTRSnoopL1Latency BGM_LTRSnoopL0Latency BGM_LTRNoSnoopL1Latency BGM_LTRNoSnoopL0Latency
         BGM_LTRMaxSnoopLatencyValue BGM_LTRMaxNoSnoopLatencyValue) do (reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "%%a" /t REG_DWORD /d "1" /f
 )
+timeout /t 1 /nobreak > NUL
 
 :: device manager settings
 curl -g -k -L -# -o "C:\Windows\System32\DevManView.exe" "https://github.com/zipmishahl2/CS2-optimization/raw/main/DevManView.exe"
@@ -579,7 +625,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v "AllowGameDVR" /t 
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f 
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NoLazyMode" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG_DWORD /d "2" /f
-reg add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d "128" /f
+reg add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d "72" /f
 reg add "HKCU\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d "1" /f
 reg add "HKCU\Control Panel\Desktop" /v "HungAppTimeout" /t REG_SZ /d "1000" /f
 reg add "HKCU\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t REG_SZ /d "2000" /f
@@ -606,12 +652,6 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverrideMask" /t REG_DWORD /d "3" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "GlobalTimerResolutionRequests" /t REG_DWORD /d "1" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" /v "DisableTsx" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "DefaultTTL" /t REG_DWORD /d "64" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "GlobalMaxTcpWindowSize" /t REG_DWORD /d "415029" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "MaxUserPort" /t REG_DWORD /d "415028" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "Tcp1323Opts" /t REG_DWORD /d "1" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TcpMaxDupAcks" /t REG_DWORD /d "2" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" /v "TCPTimedWaitDelay" /t REG_DWORD /d "48" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583" /v "Attributes" /t REG_DWORD /d "0" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
@@ -1737,7 +1777,9 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 timeout /t 1 /nobreak > NUL
 
 echo schtasks disabled...
+
 title schtasks disabled...
+
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator"
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\BthSQM"
@@ -1846,6 +1888,7 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :services
+
 echo disabled services windows...
 Powershell Set-Service AppVClient -StartupType Disabled
 Powershell Set-Service NetTcpPortSharing -StartupType Disabled
@@ -1907,6 +1950,7 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :network
+
 echo Configuring Sock Address Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MaxSockAddrLength" /t REG_DWORD /d "16" /f
