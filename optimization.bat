@@ -6,6 +6,9 @@ cls
 md C:\pc-optimization
 call :adminwindow
 
+
+https://cdn.discordapp.com/attachments/1225846086111854706/1226834098178490388/optimization.nip?ex=6626354a&is=6613c04a&hm=7280f54843bcd1878dbf65a87382b21cafa138cba5c43db723dfe8c4dac08106&
+
 :Home
 title Home - PC OPTIMIZATION
 chcp 65001 >nul 2>&1
