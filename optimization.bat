@@ -6,6 +6,8 @@ cls
 md C:\pc-optimization
 call :adminwindow
 
+wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "before optimization", 100, 7
+
 :Home
 title Home - PC OPTIMIZATION
 chcp 65001 >nul 2>&1
@@ -2267,7 +2269,6 @@ if '%choice%'=='3' goto internet
 
 :defender
 cls
-
 
 
 :adminwindow
