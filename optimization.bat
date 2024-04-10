@@ -1,5 +1,5 @@
 @echo off
-set Version=2.6
+set Version=2.6 betaRelease
 color 03
 chcp 65001
 cls
@@ -37,6 +37,7 @@ if %HomeSelection% == 1 (call :optimization)
 if %HomeSelection% == 2 (call :services)
 if %HomeSelection% == 3 (call :network)
 if %HomeSelection% == 4 (call :gamepriority)
+if %HomeSelection% == 5 (call :fixWindows)
 pause
 
 :Optimization
@@ -2244,6 +2245,30 @@ cls
 echo Wait 1 second...
 timeout /t 1 /nobreak >nul
 goto home
+
+:fixWindows
+set z=[7m
+set i=[1m
+set q=[0m
+echo %z%What do you want to fix?%q%
+echo.
+echo %i%defender= 1%q%
+echo.
+echo %i%servicesWindows = 2%q%
+echo.
+echo %i%internet = 3%q%
+echo.
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto defender
+if '%choice%'=='2' goto servicesWindows
+if '%choice%'=='3' goto internet
+
+:defender
+cls
+
+
 
 :adminwindow
 mode 104, 17
