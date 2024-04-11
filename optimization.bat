@@ -6,8 +6,6 @@ cls
 md C:\pc-optimization
 call :adminwindow
 
-wmic.exe /Namespace:\\root\default Path SystemRestore Call CreateRestorePoint "before optimization", 100, 7
-
 :Home
 title Home - PC OPTIMIZATION
 chcp 65001 >nul 2>&1
@@ -575,8 +573,8 @@ DevManView.exe /disable "WAN Miniport (Network Monitor)"
 cls
 echo.
 
-echo Making changes to the registry...
-title Making changes to the registry...
+:: Making changes to the registry...
+@REM Making changes to the registry...
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" /v "Value" /t REG_SZ /d "Deny" /f 
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f 
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /v "Value" /t REG_SZ /d "Deny" /f 
@@ -2271,6 +2269,7 @@ if '%choice%'=='3' goto internet
 :defender
 cls
 
+soon
 
 :adminwindow
 mode 104, 17
