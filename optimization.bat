@@ -89,7 +89,7 @@ deltree /y c:\windows\spool\printers
 cls
 
 :: powershell tweaking
-echo cleaning Windows from trash
+@rem Debloat Windows & Remove Preinstalled Programs
 powershell "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString() -ErrorAction SilentlyContinue}"
 powershell "Remove-Item -Path \"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\" -Recurse -ErrorAction SilentlyContinue"
 PowerShell -Command "Disable-MMAgent -PageCombining"
@@ -206,15 +206,18 @@ for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PC
     )
   )
 )
+
 for /f %%n in ('wmic path win32_networkadapter get PNPDeviceID ^| findstr /L "VEN_"') do (
 Reg.exe ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\%%n\Device Parameters\Interrupt Management\Affinity Policy" /v "AssignmentSetOverride" /t REG_BINARY /d "04" /f
 Reg.exe ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\%%n\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePolicy" /t REG_DWORD /d "4" /f
 Reg.exe ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\%%n\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MessageNumberLimit" /t REG_DWORD /d "256" /f
 )
+
 echo Disable Gpu Scaling
 for /f %%i in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /s /f Scaling') do set "str=%%i" & if "!str!" neq "!str:Configuration\=!" (
 	Reg.exe add "%%i" /v "Scaling" /t REG_DWORD /d "1" /f 
 )
+
 timeout /t 3 /nobreak > NUL
 
 set z=[7m
@@ -311,8 +314,6 @@ echo %i%NVIDIA = 1%q%
 echo.
 echo %i%AMD = 2%q%
 echo.
-echo %i%IGPU = 3%q%
-echo.
 set choice=
 set /p choice=
 if not '%choice%'=='' set choice=%choice:~0,1%
@@ -325,8 +326,8 @@ if '%choice%'=='2' goto AMD
 echo Applying NVIDIA Inspector Profile
 curl -g -k -L -# -o "%temp%\nvidiaProfileInspector.zip" "https://github.com/Orbmu2k/nvidiaProfileInspector/releases/latest/download/nvidiaProfileInspector.zip"
 powershell -NoProfile Expand-Archive '%temp%\nvidiaProfileInspector.zip' -DestinationPath 'C:\NvidiaProfileInspector\'
-curl -g -k -L -# -o "C:\NvidiaProfileInspector\optimization.nip" "https://cdn.discordapp.com/attachments/1225846086111854706/1226834098178490388/optimization.nip?ex=6626354a&is=6613c04a&hm=7280f54843bcd1878dbf65a87382b21cafa138cba5c43db723dfe8c4dac08106&"
-start "" /wait "C:\NvidiaProfileInspector\nvidiaProfileInspector.exe" "C:\NvidiaProfileInspector\optimization.nip"
+curl -g -k -L -# -o "C:\NvidiaProfileInspector\optimizationV2.nip" "https://github.com/zipmishahl2/CS2-optimization/raw/main/optimizationV2.nip"
+start "" /wait "C:\NvidiaProfileInspector\nvidiaProfileInspector.exe" "C:\NvidiaProfileInspector\optimizationV2.nip"
 timeout /t 3 /nobreak > NUL
 
 :: Enable MSI Mode for GPU
