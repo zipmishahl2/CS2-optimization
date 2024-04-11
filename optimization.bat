@@ -1,5 +1,5 @@
 @echo off
-set Version=2.6 betaRelease
+set Version=2.8 beta
 color 03
 chcp 65001
 cls
@@ -575,6 +575,7 @@ echo.
 
 :: Making changes to the registry...
 @REM Making changes to the registry...
+reg add "HKEY_LOCAL_MACHINESOFTWARE\Microsoft\Office\15.0\Registration\{87D2B5BF-D47B-41FB-AF62-71C382F5CC85" /v "HideTrial" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" /v "Value" /t REG_SZ /d "Deny" /f 
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f 
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /v "Value" /t REG_SZ /d "Deny" /f 
@@ -2269,7 +2270,82 @@ if '%choice%'=='3' goto internet
 :defender
 cls
 
-soon
+:: fixed defender
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "ServiceKeepAlive" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d "0" /f
+
+:: services defender enabled
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "3" /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /v "Start" /t REG_DWORD /d "3" /f
+
+goto home
+
+:servicesWindows
+cls
+
+Powershell Set-Service NetTcpPortSharing -StartupType Enabled
+Powershell Set-Service CscService -StartupType Enabled
+Powershell Set-Service PhoneSvc -StartupType Enabled
+Powershell Set-Service Spooler -StartupType Enabled
+Powershell Set-Service PrintNotify -StartupType Enabled
+Powershell Set-Service QWAVE -StartupType Enabled
+Powershell Set-Service RmSvc -StartupType Enabled
+Powershell Set-Service RemoteAccess -StartupType Enabled
+Powershell Set-Service SensorDataService -StartupType Enabled
+Powershell Set-Service SensrSvc -StartupType Enabled
+Powershell Set-Service SensorService -StartupType Enabled
+Powershell Set-Service ShellHWDetection -StartupType Enabled
+Powershell Set-Service SCardSvr -StartupType Enabled
+Powershell Set-Service ScDeviceEnum -StartupType Enabled
+Powershell Set-Service SSDPSRV -StartupType Enabled
+Powershell Set-Service WiaRpc -StartupType Enabled
+Powershell Set-Service upnphost -StartupType Enabled
+Powershell Set-Service UserDataSvc -StartupType Enabled
+Powershell Set-Service UevAgentService -StartupType Enabled
+Powershell Set-Service WalletService -StartupType Enabled
+Powershell Set-Service FrameServer -StartupType Enabled
+Powershell Set-Service stisvc -StartupType Enabled
+Powershell Set-Service wisvc -StartupType Enabled
+Powershell Set-Service icssvc -StartupType Enabled
+Powershell Set-Service WSearch -StartupType Enabled
+Powershell Set-Service XblAuthManager -StartupType Enabled
+Powershell Set-Service XblGameSave -StartupType Enabled
+Powershell Set-Service SEMgrSvc -StartupType Enabled
+Powershell Set-Service SysMain -StartupType Enabled
+Powershell Set-Service diagnosticshub.standardcollector.service -StartupType Enabled
+Powershell Set-Service diagsvc -StartupType Enabled
+Powershell Set-Service WbioSrvc -StartupType Enabled
+Powershell Set-Service MapsBloker -StartupType Enabled
+Powershell Set-Service lfsvc -StartupType Enabled
+Powershell Set-Service UevAgentService -StartupType Enabled
+Powershell Set-Service WinDefend -StartupType Enabled
+Powershell Set-Service SecurityHealthService -StartupType Enabled
+Powershell Set-Service WdNisSvc -StartupType Enabled
+Powershell Set-Service Sense -StartupType Enabled
+Powershell Set-Service wscsvc -StartupType Enabled
+Powershell Set-Service AxInstSV -StartupType Enabled
+Powershell Set-Service dmwappushservice -StartupType Enabled
+Powershell Set-Service SharedAccess -StartupType Enabled
+Powershell Set-Service lltdsvc -StartupType Enabled
+
+goto home
+
+:internet
+cls
+
+netsh winsock reset
+netsh int ip reset
+netsh int tcp reset
+
+goto home
 
 :adminwindow
 mode 104, 17
