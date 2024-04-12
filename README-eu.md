@@ -24,7 +24,7 @@ RAM: 16 GB
 * lntel Speed Shit Technology
 * CSM support (disabled if Windows is on GPT)
 *CPG Lock
-# Selecting Windows for KS2
+# Selecting Windows for CS2
 XOS win10 | win11
 
 HypeOS
@@ -33,7 +33,7 @@ SystemX win10
 
 __changes in 2025 will be due to the departure of Win10__
 
-# How to optimize KS2?
+# How to optimize CS2?
 - Be sure to test "**disable under-screen optimization**" and **on**
 
 
