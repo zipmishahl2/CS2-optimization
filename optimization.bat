@@ -1,5 +1,5 @@
 @echo off
-set Version=2.8 Release 
+set Version=3.1 beta
 color 03
 chcp 65001
 cls
