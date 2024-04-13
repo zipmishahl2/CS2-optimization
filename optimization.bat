@@ -49,10 +49,9 @@ echo.
 
 :: Import power plan
 @REM Import power plan for all users
-curl -g -k -L -# -o "C:\powerplan.pow" "https://cdn.discordapp.com/attachments/1188709163044442164/1225126334280499352/powerplan.pow?ex=661ffecf&is=660d89cf&hm=611b2157dfab7eb643943cfcf7ea9a940742deb7b53e56c36ccde7d2f26e242e&"
-powercfg -import "C:\powerplan.pow" a6df1428-f7b4-4039-89a2-9857401b8c37
-powercfg -changename a6df1428-f7b4-4039-89a2-9857401b8c37 "DraganOS - Power plan Gaming" "lowing latency and high performance"
-powercfg -setactive a6df1428-f7b4-4039-89a2-9857401b8c37
+curl -g -k -L -# -o "C:\powerplan.pow" "https://cdn.discordapp.com/attachments/1225846086111854706/1228754893968248852/powerplan.pow?ex=662d322b&is=661abd2b&hm=2f136b2e41366de65cf47742bbb6f3d62aa447c710ec8a9ad60e72aa00ea64e1&"
+powercfg -import "C:\powerplan.pow" 120ea5af-085f-41e2-8e8b-dd538b38e4f7
+powercfg -setactive 120ea5af-085f-41e2-8e8b-dd538b38e4f7
 echo power plan hibernate disabled...
 powercfg /hibernate off
 timeout /t 3 /nobreak > NUL
