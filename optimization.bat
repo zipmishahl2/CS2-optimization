@@ -1,5 +1,6 @@
 @echo off
 set Version=2.8 beta
+set WinC=DraganOS 10 - 11
 color 03
 chcp 65001
 cls
@@ -33,6 +34,7 @@ echo %w%════════════════════════
 echo                                         Press function number (1-4)                                                       
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo                                           Version Batch: %Version%
+echo                                         Best windows custom: %winC%
 choice /c 12345 /n
 set HomeSelection=%errorlevel%
 if %HomeSelection% == 1 (call :optimization)
