@@ -2370,7 +2370,8 @@ Powershell Set-Service AxInstSV -StartupType Enabled
 Powershell Set-Service dmwappushservice -StartupType Enabled
 Powershell Set-Service SharedAccess -StartupType Enabled
 Powershell Set-Service lltdsvc -StartupType Enabled
-
+sc delete DiagTrack
+sc delete dmwappushservice
 goto home
 
 :internet
