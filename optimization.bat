@@ -237,6 +237,7 @@ if '%choice%'=='1' goto win10
 if '%choice%'=='2' goto win11
 
 :win10
+cls
 
 :: BCD Tweaks
 echo Applying BCD Tweaks
@@ -288,6 +289,7 @@ del "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /s /f /q
 timeout /t 1 /nobreak > NUL
 
 :win11
+cls
 
 : BCD Tweaks
 echo Applying BCD Tweaks
