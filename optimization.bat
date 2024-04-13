@@ -53,6 +53,7 @@ echo.
 @REM Import power plan for all users
 curl -g -k -L -# -o "C:\powerplan.pow" "https://cdn.discordapp.com/attachments/1188709163044442164/1225126334280499352/powerplan.pow?ex=661ffecf&is=660d89cf&hm=611b2157dfab7eb643943cfcf7ea9a940742deb7b53e56c36ccde7d2f26e242e&"
 powercfg -import "C:\powerplan.pow" a6df1428-f7b4-4039-89a2-9857401b8c37
+powercfg -changename a6df1428-f7b4-4039-89a2-9857401b8c37 "DraganOS - Power plan Gaming" "lowing latency and high performance"
 powercfg -setactive a6df1428-f7b4-4039-89a2-9857401b8c37
 echo power plan hibernate disabled...
 powercfg /hibernate off
