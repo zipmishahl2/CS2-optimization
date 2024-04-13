@@ -2072,8 +2072,9 @@ Powershell Set-Service AxInstSV -StartupType Disabled
 Powershell Set-Service dmwappushservice -StartupType Disabled
 Powershell Set-Service SharedAccess -StartupType Disabled
 Powershell Set-Service lltdsvc -StartupType Disabled
-timeout /t 2 /nobreak > NUL
-timeout /t 1 /nobreak > NUL
+sc delete DiagTrack
+sc delete dmwappushservice
+timeout /t 3 /nobreak > NUL
 echo Need a reboot, restart pc now or later?
 echo.
 echo [1] Reboot pc now?
@@ -2370,8 +2371,6 @@ Powershell Set-Service AxInstSV -StartupType Enabled
 Powershell Set-Service dmwappushservice -StartupType Enabled
 Powershell Set-Service SharedAccess -StartupType Enabled
 Powershell Set-Service lltdsvc -StartupType Enabled
-sc delete DiagTrack
-sc delete dmwappushservice
 goto home
 
 :internet
