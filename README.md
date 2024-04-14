@@ -12,7 +12,7 @@
 > ![VALVE](https://raw.githubusercontent.com/zipmishahl2/CS2-optimization/main/images.jpeg)
 > maximize performance and minimize latency. and higher framerates over using standard Windows.
 
-> with our optimization you can get a maximum of 0.5 fps
+> with our optimization you can get a maximum of 0.5 average fps
 
 > [!WARNING]
 > We are not responsible for the attitude of your system, you do it at your own risk.
