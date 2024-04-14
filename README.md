@@ -9,7 +9,7 @@
 
 # System requirements
 - windows 10 - 11
-``not playbooks!``
+``not playbooks and boosterx etc. so bad programs``
 
 > [!NOTE]
 > F**k VALVE Upgrade to Optimization
