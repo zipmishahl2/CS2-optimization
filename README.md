@@ -16,8 +16,9 @@ not playbooks and boosterx etc. so bad programs
 ```
 
 # Information 
-> [!NOTE]
 > F**k VALVE Upgrade to Optimization
+
+> [!NOTE]
 > maximize performance and minimize latency. and higher framerates using standard Windows.
 
 > [!Caution]
