@@ -8,7 +8,8 @@
 [🇰🇿Қазақстан әзірлеуде](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-kz.md)
 
 > [!NOTE]
-> optimization is needed so that Windows itself starts faster and also increases FPS 0.5 It's easy to lower latency.
+> F**k VALVE to updated Optimization
+![image](https://raw.githubusercontent.com/zipmishahl2/CS2-optimization/main/images.jpeg)
 
 > [!WARNING]
 > We are not responsible for the attitude of your system, you do it at your own risk.
