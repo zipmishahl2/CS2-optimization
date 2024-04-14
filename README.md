@@ -9,8 +9,12 @@
 
 # System requirements
 - windows 10 - 11
-``not playbooks and boosterx etc. so bad programs``
 
+``` python
+not playbooks and boosterx etc. so bad programs
+```
+
+# Information 
 > [!NOTE]
 > F**k VALVE Upgrade to Optimization
 > ![VALVE](https://raw.githubusercontent.com/zipmishahl2/CS2-optimization/main/images.jpeg)
