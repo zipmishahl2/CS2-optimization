@@ -7,9 +7,7 @@ md C:\pc-optimization
 call :adminwindow
 
 :Home
-title Home - PC OPTIMIZATION
 chcp 65001 >nul 2>&1
-color 03
 cls
 set c=[33m
 set t=[0m
@@ -17,21 +15,28 @@ set w=[95m
 set y=[0m
 set u=[4m
 set q=[0m
+echo.
+echo.
+echo.
+echo.
 echo                          %c%╔═══╗╔══╗───╔══╗╔═══╗╔════╗╔══╗╔╗──╔╗╔══╗╔═══╗╔══╗╔════╗╔══╗╔══╗╔╗─╔╗%c%
 echo                          %c%║╔═╗║║╔═╝───║╔╗║║╔═╗║╚═╗╔═╝╚╗╔╝║║──║║╚╗╔╝╚═╗─║║╔╗║╚═╗╔═╝╚╗╔╝║╔╗║║╚═╝║%c%
 echo                          %c%║╚═╝║║║─────║║║║║╚═╝║──║║───║║─║╚╗╔╝║─║║──╔╝╔╝║╚╝║──║║───║║─║║║║║╔╗─║%c%
 echo                          %c%║╔══╝║║─────║║║║║╔══╝──║║───║║─║╔╗╔╗║─║║─╔╝╔╝─║╔╗║──║║───║║─║║║║║║╚╗║%c%
 echo                          %c%║║───║╚═╗───║╚╝║║║─────║║──╔╝╚╗║║╚╝║║╔╝╚╗║─╚═╗║║║║──║║──╔╝╚╗║╚╝║║║─║║%c%
 echo                          %c%╚╝───╚══╝───╚══╝╚╝─────╚╝──╚══╝╚╝──╚╝╚══╝╚═══╝╚╝╚╝──╚╝──╚══╝╚══╝╚╝─╚╝%c%
-echo                           %c%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %c%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
+echo                                                   %c%Created By: zipmishahl2%t%     
+echo                                                      %c%%u%Version: %Version%%q%%t%
+echo.
+echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
+echo.
+echo.
+echo.                          %c%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %c%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
 echo. 
 echo.
-echo                           %c%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %c%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%
-echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
-echo                                         Press function number (1-4)                                                       
-echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
-echo                                           Version Batch: %Version%
-choice /c 12345 /n
+echo                           %c%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %c%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%                                                       
+set choice=
+set /p choice=
 set HomeSelection=%errorlevel%
 if %HomeSelection% == 1 (call :optimization)
 if %HomeSelection% == 2 (call :services)
