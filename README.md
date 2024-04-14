@@ -10,6 +10,7 @@
 # System requirements
 - windows 10 - 11
 
+- The most stable Windows: Win10
 ``` python
 not playbooks and boosterx etc. so bad programs
 ```
