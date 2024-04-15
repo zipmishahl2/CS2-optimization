@@ -2299,7 +2299,7 @@ cls
 title priority cs2..
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cs2.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 echo Wait 2 second...
-timeout /t 1 /nobreak >nul
+timeout /t 2 /nobreak >nul
 cls
 echo Wait 1 second...
 timeout /t 1 /nobreak >nul
@@ -2310,7 +2310,7 @@ cls
 title priority valorant..
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\VALORANT.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 echo Wait 2 second...
-timeout /t 1 /nobreak >nul
+timeout /t 2 /nobreak >nul
 cls
 echo Wait 1 second...
 timeout /t 1 /nobreak >nul
@@ -2321,7 +2321,7 @@ cls
 title priority fortnite..
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 echo Wait 2 second...
-timeout /t 1 /nobreak >nul
+timeout /t 2 /nobreak >nul
 cls
 echo Wait 1 second...
 timeout /t 1 /nobreak >nul
