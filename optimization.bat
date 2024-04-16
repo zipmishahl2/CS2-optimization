@@ -58,6 +58,34 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
 
+:Disclaimer
+reg query "HKCU\Software\CS2bth" /v "Disclaimer" >nul 2>&1 && goto CheckForUpdates
+cls
+echo.
+echo.
+call :CS2bthTitle
+echo.
+echo.
+echo.
+echo %COL%[91m  WARNING:
+echo %COL%[37m  Please note that we cannot guarantee an FPS boost from applying our optimizations, every system + configuration is different.
+echo.
+echo     %COL%[33m1.%COL%[37m Everything is "use at your own risk", we are %COL%[91mNOT LIABLE%COL%[37m if you damage your system in any way
+echo        (ex. not following the disclaimers carefully).
+echo.
+echo     %COL%[33m2.%COL%[37m If you don't know what a tweak is, do not use it and contact our support team to receive more assistance.
+echo.
+echo     %COL%[33m3.%COL%[37m Even though we have an automatic restore point feature, we highly recommend making a manual restore point before running.
+echo.
+echo.
+echo   Please enter "I agree" without quotes to continue:
+echo.
+echo.
+echo.
+set /p "input=%DEL%                                                            >: %COL%[92m"
+if /i "!input!" neq "i agree" goto Disclaimer
+reg add "HKCU\Software\CS2Bth" /v "Disclaimer" /f >nul 2>&1
+
 :Home
 chcp 65001 >nul 2>&1
 cls
@@ -86,7 +114,8 @@ echo.
 echo.                          %c%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %c%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
 echo. 
 echo.
-echo                           %c%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %c%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t%                                                       
+echo.                          %c%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %c%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t% 
+echo.                                                                 %c%[%y% %c%%u%5%q%%t% %w%]%y% %c%Disclaimer%t%
 set choice=
 set /p choice=
 set HomeSelection=%errorlevel%
@@ -94,6 +123,7 @@ if %HomeSelection% == 1 (call :optimization)
 if %HomeSelection% == 2 (call :services)
 if %HomeSelection% == 3 (call :network)
 if %HomeSelection% == 4 (call :gamepriority)
+if %HomeSelection% == 5 (call :Disclaimer)
 pause
 
 :Optimization
