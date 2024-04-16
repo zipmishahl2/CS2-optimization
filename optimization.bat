@@ -2259,20 +2259,20 @@ cls
 set z=[7m
 set i=[1m
 set q=[0m
-echo %z%Are you on cs2, valorant fortnite?%q%
+echo %z%Are you on cs2, valorant, and etc?%q%
 echo.
 echo %i%cs2 = 1%q%
 echo.
 echo %i%valorant = 2%q%
 echo.
-echo %i%fortnite = 3%q%
+echo %i%next = 3%q%
 echo.
 set choice=
 set /p choice=
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto cs2
 if '%choice%'=='2' goto valorant
-if '%choice%'=='3' goto fortnite
+if '%choice%'=='3' goto next
 
 :cs2
 cls
@@ -2288,10 +2288,32 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 timeout /t 3 /nobreak >nul
 goto home
 
+set z=[7m
+set i=[1m
+set q=[0m
+echo %z%Are you on fortnite, csgo?%q%
+echo.
+echo %i%fortnite = 1%q%
+echo.
+echo %i%csgo = 2%q%
+echo.
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto fortnite
+if '%choice%'=='2' goto csgo
+
 :fortnite
 cls
 
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
+timeout /t 3 /nobreak >nul
+goto home
+
+:csgo
+cls
+
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csgo.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 timeout /t 3 /nobreak >nul
 goto home
 
