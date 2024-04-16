@@ -109,7 +109,6 @@ powercfg /hibernate off
 timeout /t 3 /nobreak > NUL
 
 :: clear pc
-cls
 @REM Cleaning PC
 del /s /f /q c:\windows\temp.
 del /s /f /q C:\WINDOWS\Prefetch
