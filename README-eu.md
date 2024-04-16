@@ -11,41 +11,32 @@ RAM: 16 GB
 ### 120 FPS > 400 FPS
 ## Before setting up the BIOS, update to the latest firmware version
 # Setting up BIOS to increase FPS
-### AMD disable
+### AMD Disable
 * Fast boot - off (blue screens people complain about)
 * SVM Mode (virtualization is AMD-V)
 * XMP profile enable (profile 1)
 * Leave TPM and Seture Boot (if you have Windows 11)
 * CSM support (disabled if Windows is on GPT)
 * hyperthreading(SMT Mode) - off
-### INTEL shutdown
+### INTEL Disable
 * VT-d virtual machine
 * Fast boot (blue screens people complain about)
 * lntel Speed Shit Technology
 * CSM support (disabled if Windows is on GPT)
-*CPG Lock
+* CPG Lock
+
 # Selecting Windows for CS2
-XOS win10 | win11
-
-HypeOS
-
-SystemX win10
-
-__changes in 2025 will be due to the departure of Win10__
+DraganOS win10 - win11
 
 # How to optimize CS2?
-- Be sure to test "**disable under-screen optimization**" and **on**
-
-
 - in order to optimize the game we need a reg file and PC settings
 
 ok, in order for the game to be without small friezes, take this tweak which is in releases
 This tweak turns off the cs2 overlay so you can play without freezes
 
 # CS2 launch options
--novid -nojoy -nopreload -softparticledefaultoff -d3d9ex -limitvsconst -particles 512 +violence_hblood 0 -language english
+-high +cl_forcepreload 1 -noaafonts +exec cs3 +exec cs2 -novid -nojoy -noipx +fps_max 0 -tickrate 128 +violence_hblood 0 -nosync
 # NVIDIA setup
-👌[Download NVIDIA Best Driver](https://drive.google.com/file/d/1vk11R72kxsTqFP1tB6JC67Lzgy0E0Nsf/view?usp=sharing)
 ![PhysX video](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/dc709dc0-4321-4fb6-a405-2376f2443cc6)
 ![coloring colors](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5a2fd82c-4a79-4f24-bfc3-33ce8a892cc3)
 ![flower coloring (2)](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/7c05490c-bc88-46d0-86d5-d86f502a44fe)
@@ -61,18 +52,12 @@ This tweak turns off the cs2 overlay so you can play without freezes
 ![enable developer mode](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/2741a0ff-0bfe-4518-af9e-c73fa193777e)
 
 # Windows Power 
-- we suggest using High Performance
-- Or use my power supply customization.
+- we suggest using my power plan
 
-[🚀 Customization CLICK](https://drive.google.com/file/d/18spw1FkTopUmpKdvyzWYl37115hOylrV/view?usp=sharing)
+download: [click](https://github.com/zipmishahl2/CS2-optimization/releases/tag/power-plan)
 
-customizing Windows Power Supply
-
-
-In my power supply custom everything is disabled.
-download: https://github.com/zipmishahl2/CS2-optimization/releases/tag/power-plan
 # Setting up CS2
-- we recommend disabling Reflex NVIDIA
+- we recommend disabling Reflex NVIDIA since she eats kernels by 1%
 ![graphics](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/11c0244f-066f-447d-8fc0-b430c16e5631)
 
 ![resolution](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/5f717e04-5fd9-4416-8911-27f34d538699)
@@ -90,14 +75,11 @@ download: https://github.com/zipmishahl2/CS2-optimization/releases/tag/power-pla
 - turn off power consumption
 ![image](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/086afc19-9d99-4a27-8ade-b9f609edb370)
 
-video about internet settings
-Realtek internet
-[Internet setup CLICK](https://drive.google.com/file/d/1KrPfJPvsawHzVmma483_-Q1-mEgEXWK3/view?usp=sharing)
-
-# Imput Lag CS2
+# Input Lag CS2
 [🗿View CLICK](https://docs.google.com/spreadsheets/d/11JYxixzy106DXcrxrDGYf2lwCzUVvHHyFNCv0Cb0HLI/edit?usp=drivesdk)
 
 CS2 imput lag (Tables)
+
 # New from 13.02.2024
 1. Settings -> Sound -> sound - set a specific Playback Device and a specific Audio Voice Recording Device (Not Default Device)
 2. Settings -> Game -> Game - set Buffering to smooth out packet losses to either 1 or 2 packets (test).
@@ -105,6 +87,7 @@ CS2 imput lag (Tables)
 Copyright @sledok
 # New from 02.04.2024
 [🆙 click to download the optimization pack](https://github.com/zipmishahl2/CS2-optimization/releases/download/optimizaton/cs2.optimizaton.rar)
+
 # Questions
 What is the overlay in CS2?
 
@@ -118,7 +101,7 @@ who has a video card below 1000 series
 It's better not to use tweaks
 will make things worse
 
-# Good commands to increase FPS
+# Good commands
 - engine_low_latency_sleep_after_client_tick true
 - fps_max 0
 - rate 10000000
@@ -126,6 +109,7 @@ will make things worse
 - alias C "clear; clearall; clear_bombs"
 - cl_usenewbob false
 - cl_hud_telemetry_serverrecvmargin_graph_show
+
 # Result of Optimization of CS2
 ![low_latency_cs2_command](https://github.com/zipmishahl2/CS2-optimization/assets/110753825/ea288671-c6a5-4899-9514-ff649cea853d)
 engine_low_latency_sleep_after_client_tick true
@@ -139,5 +123,3 @@ What have we achieved during this time?
 We have made more frames in cs2 for a smooth game
 
 after restarting the pc, fps will be added every day when it is added, it will already finish that it has scored its amount for CS2
-# Support for hard work
-[💵 Donate for the guide](https://www.donationalerts.com/r/rebooteam)
