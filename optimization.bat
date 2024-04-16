@@ -58,7 +58,6 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
 
-:: Home main
 :Home
 chcp 65001 >nul 2>&1
 cls
@@ -95,13 +94,10 @@ if %HomeSelection% == 1 (call :optimization)
 if %HomeSelection% == 2 (call :services)
 if %HomeSelection% == 3 (call :network)
 if %HomeSelection% == 4 (call :gamepriority)
-if %HomeSelection% == 5 (call :fixWindows)
 pause
 
 :Optimization
 cls
-echo We are setting up your PC...
-echo.
 
 :: Import power plan
 @REM Import power plan for all users
@@ -2068,6 +2064,7 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :services
+cls
 
 echo disabled services windows...
 Powershell Set-Service AppVClient -StartupType Disabled
@@ -2131,6 +2128,7 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :network
+cls
 
 echo Configuring Sock Address Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
@@ -2276,6 +2274,8 @@ timeout /t 3 /nobreak > NUL
 goto home
 
 :gamepriority
+cls
+
 set z=[7m
 set i=[1m
 set q=[0m
@@ -2325,102 +2325,4 @@ timeout /t 2 /nobreak >nul
 cls
 echo Wait 1 second...
 timeout /t 1 /nobreak >nul
-goto home
-
-:fixWindows
-set z=[7m
-set i=[1m
-set q=[0m
-echo %z%What do you want to fix?%q%
-echo.
-echo %i%defender= 1%q%
-echo.
-echo %i%servicesWindows = 2%q%
-echo.
-echo %i%internet = 3%q%
-echo.
-set choice=
-set /p choice=
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto defender
-if '%choice%'=='2' goto servicesWindows
-if '%choice%'=='3' goto internet
-
-:defender
-cls
-
-:: fixed defender
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableRoutinelyTakingAction" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "ServiceKeepAlive" /t REG_DWORD /d "1" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableBehaviorMonitoring" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableIOAVProtection" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d "0" /f
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d "0" /f
-
-:: services defender enabled
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "3" /f
-reg add "HKLM\SYSTEM\CurrentControlSet\Services\wscsvc" /v "Start" /t REG_DWORD /d "3" /f
-
-goto home
-
-:servicesWindows
-cls
-
-Powershell Set-Service NetTcpPortSharing -StartupType Enabled
-Powershell Set-Service CscService -StartupType Enabled
-Powershell Set-Service PhoneSvc -StartupType Enabled
-Powershell Set-Service Spooler -StartupType Enabled
-Powershell Set-Service PrintNotify -StartupType Enabled
-Powershell Set-Service QWAVE -StartupType Enabled
-Powershell Set-Service RmSvc -StartupType Enabled
-Powershell Set-Service RemoteAccess -StartupType Enabled
-Powershell Set-Service SensorDataService -StartupType Enabled
-Powershell Set-Service SensrSvc -StartupType Enabled
-Powershell Set-Service SensorService -StartupType Enabled
-Powershell Set-Service ShellHWDetection -StartupType Enabled
-Powershell Set-Service SCardSvr -StartupType Enabled
-Powershell Set-Service ScDeviceEnum -StartupType Enabled
-Powershell Set-Service SSDPSRV -StartupType Enabled
-Powershell Set-Service WiaRpc -StartupType Enabled
-Powershell Set-Service upnphost -StartupType Enabled
-Powershell Set-Service UserDataSvc -StartupType Enabled
-Powershell Set-Service UevAgentService -StartupType Enabled
-Powershell Set-Service WalletService -StartupType Enabled
-Powershell Set-Service FrameServer -StartupType Enabled
-Powershell Set-Service stisvc -StartupType Enabled
-Powershell Set-Service wisvc -StartupType Enabled
-Powershell Set-Service icssvc -StartupType Enabled
-Powershell Set-Service WSearch -StartupType Enabled
-Powershell Set-Service XblAuthManager -StartupType Enabled
-Powershell Set-Service XblGameSave -StartupType Enabled
-Powershell Set-Service SEMgrSvc -StartupType Enabled
-Powershell Set-Service SysMain -StartupType Enabled
-Powershell Set-Service diagnosticshub.standardcollector.service -StartupType Enabled
-Powershell Set-Service diagsvc -StartupType Enabled
-Powershell Set-Service WbioSrvc -StartupType Enabled
-Powershell Set-Service MapsBloker -StartupType Enabled
-Powershell Set-Service lfsvc -StartupType Enabled
-Powershell Set-Service UevAgentService -StartupType Enabled
-Powershell Set-Service WinDefend -StartupType Enabled
-Powershell Set-Service SecurityHealthService -StartupType Enabled
-Powershell Set-Service WdNisSvc -StartupType Enabled
-Powershell Set-Service Sense -StartupType Enabled
-Powershell Set-Service wscsvc -StartupType Enabled
-Powershell Set-Service AxInstSV -StartupType Enabled
-Powershell Set-Service dmwappushservice -StartupType Enabled
-Powershell Set-Service SharedAccess -StartupType Enabled
-Powershell Set-Service lltdsvc -StartupType Enabled
-goto home
-
-:internet
-cls
-
-netsh winsock reset
-netsh int ip reset
-netsh int tcp reset
-
 goto home
