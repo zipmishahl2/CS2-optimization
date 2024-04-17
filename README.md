@@ -16,6 +16,8 @@ not playbooks and boosterx etc. so bad programs
 ```
 
 # Information 
+Get the latest version 2.8 (April 14, 2024) [here](https://github.com/zipmishahl2/cs2-optimization/releases/latest)
+
 > F**k VALVE Upgrade to Optimization
 
 > [!NOTE]
