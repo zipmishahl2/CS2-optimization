@@ -25,8 +25,7 @@ SHA-256:
 > We are not responsible for the attitude of your system, you do it at your own risk.
 
 # Information 
-
-> F**k VALVE Upgrade to Optimization
+> Basically, Valve does not know how to optimize his game, based on the source code of the game himself. But we will help you with system optimization and cs2.
 
 > [!NOTE]
 > maximize performance and minimize latency. and higher framerates using standard Windows.
