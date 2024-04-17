@@ -317,7 +317,8 @@ cls
 
 :: BCD Tweaks
 echo Applying BCD Tweaks
-bcdedit /set useplatformclock No
+bcdedit /deletevalue useplatformclock
+bcdedit /set bootmenupolicy Legacy
 bcdedit /set platformtick No
 bcdedit /set disabledynamictick Yes
 bcdedit /deletevalue useplatformclock
