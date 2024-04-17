@@ -58,34 +58,6 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
 
-:Disclaimer
-reg query "HKCU\Software\CS2bth" /v "Disclaimer" >nul 2>&1 && goto Home
-cls
-echo.
-echo.
-call :CS2bthTitle
-echo.
-echo.
-echo.
-echo %COL%[91m  WARNING:
-echo %COL%[37m  Please note that we cannot guarantee an FPS boost from applying our optimizations, every system + configuration is different.
-echo.
-echo     %COL%[33m1.%COL%[37m Everything is "use at your own risk", we are %COL%[91mNOT LIABLE%COL%[37m if you damage your system in any way
-echo        (ex. not following the disclaimers carefully).
-echo.
-echo     %COL%[33m2.%COL%[37m If you don't know what a tweak is, do not use it and contact our support team to receive more assistance.
-echo.
-echo     %COL%[33m3.%COL%[37m Even though we have an automatic restore point feature, we highly recommend making a manual restore point before running.
-echo.
-echo.
-echo   Please enter "I agree" without quotes to continue:
-echo.
-echo.
-echo.
-set /p "input=%DEL%                                                            >: %COL%[92m"
-if /i "!input!" neq "i agree" goto Disclaimer
-reg add "HKCU\Software\CS2Bth" /v "Disclaimer" /f >nul 2>&1
-
 :Home
 chcp 65001 >nul 2>&1
 cls
@@ -126,6 +98,95 @@ pause
 
 :Optimization
 cls
+
+set z=[7m
+set i=[1m
+set q=[0m
+echo %z%Are you on Windows 10 or 11?%q%
+echo.
+echo %i%Windows 10 = 1%q%
+echo.
+echo %i%Windows 11 = 2%q%
+echo.
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto win10
+if '%choice%'=='2' goto win11
+
+:win10
+cls
+
+:: BCD Tweaks
+echo Applying BCD Tweaks
+bcdedit /deletevalue useplatformclock
+bcdedit /set bootmenupolicy Legacy
+bcdedit /set platformtick No
+bcdedit /set disabledynamictick Yes
+bcdedit /deletevalue useplatformclock
+bcdedit /set tscsyncpolicy Enhanced
+bcdedit /set firstmegabytepolicy UseAll
+bcdedit /set avoidlowmemory 0x8000000
+bcdedit /set nolowmem Yes
+bcdedit /set allowedinmemorysettings 0x0
+bcdedit /set isolatedcontext No
+bcdedit /set vsmlaunchtype Off
+bcdedit /set vm No
+bcdedit /set x2apicpolicy Enable
+bcdedit /set configaccesspolicy Default
+bcdedit /set MSI Default
+bcdedit /set usephysicaldestination No
+bcdedit /set usefirmwarepcisettings No
+bcdedit /set disableelamdrivers Yes
+bcdedit /set pae ForceEnable 
+bcdedit /set nx optout
+bcdedit /set highestmode Yes
+bcdedit /set forcefipscrypto No
+bcdedit /set noumex Yes
+bcdedit /set uselegacyapicmode No
+bcdedit /set ems No
+bcdedit /set extendedinput Yes
+bcdedit /set debug No
+bcdedit /set hypervisorlaunchtype Off
+timeout /t 3 /nobreak > NUL
+
+:: NFTS tweaking..
+echo NFTS tweaking...
+fsutil behavior set memoryusage 2
+fsutil behavior set mftzone 4
+fsutil behavior set disablelastaccess 1
+fsutil behavior set disabledeletenotify 0
+fsutil behavior set encryptpagingfile 0
+timeout /t 3 /nobreak > NUL
+
+:: delete microCode
+echo Deleting Microcode
+takeown /f "%WinDir%\System32\mcupdate_genuineintel.dll" /r /d y
+takeown /f "%WinDir%\System32\mcupdate_authenticamd.dll" /r /d y
+icacls "%WinDir%\System32\mcupdate_genuineintel.dll" /grant:r Administrators:F /c
+icacls "%WinDir%\System32\mcupdate_authenticamd.dll" /grant:r Administrators:F /c
+del "%WinDir%\System32\mcupdate_genuineintel.dll" /s /f /q
+del "%WinDir%\System32\mcupdate_authenticamd.dll" /s /f /q
+timeout /t 3 /nobreak > NUL
+
+:win11
+cls
+
+: BCD Tweaks
+echo Applying BCD Tweaks
+bcdedit /set useplatformclock No
+bcdedit /seplatformtick No
+bcdedit /set disabledynamictick Yes
+timeout /t 3 /nobreak > NUL
+
+:: NTFS Tweaks
+echo Applying NTFS Tweaks
+fsutil behavior set memoryusage 2
+fsutil behavior set mftzone 4
+fsutil behavior set disablelastaccess 1
+fsutil behavior set disabledeletenotify 0
+fsutil behavior set encryptpagingfile 0
+timeout /t 3 /nobreak > NUL
 
 :: Import power plan
 @REM Import power plan for all users
@@ -297,95 +358,6 @@ for /f %%i in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers
 
 timeout /t 3 /nobreak > NUL
 
-set z=[7m
-set i=[1m
-set q=[0m
-echo %z%Are you on Windows 10 or 11?%q%
-echo.
-echo %i%Windows 10 = 1%q%
-echo.
-echo %i%Windows 11 = 2%q%
-echo.
-set choice=
-set /p choice=
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto win10
-if '%choice%'=='2' goto win11
-
-:win10
-cls
-
-:: BCD Tweaks
-echo Applying BCD Tweaks
-bcdedit /deletevalue useplatformclock
-bcdedit /set bootmenupolicy Legacy
-bcdedit /set platformtick No
-bcdedit /set disabledynamictick Yes
-bcdedit /deletevalue useplatformclock
-bcdedit /set tscsyncpolicy Enhanced
-bcdedit /set firstmegabytepolicy UseAll
-bcdedit /set avoidlowmemory 0x8000000
-bcdedit /set nolowmem Yes
-bcdedit /set allowedinmemorysettings 0x0
-bcdedit /set isolatedcontext No
-bcdedit /set vsmlaunchtype Off
-bcdedit /set vm No
-bcdedit /set x2apicpolicy Enable
-bcdedit /set configaccesspolicy Default
-bcdedit /set MSI Default
-bcdedit /set usephysicaldestination No
-bcdedit /set usefirmwarepcisettings No
-bcdedit /set disableelamdrivers Yes
-bcdedit /set pae ForceEnable 
-bcdedit /set nx optout
-bcdedit /set highestmode Yes
-bcdedit /set forcefipscrypto No
-bcdedit /set noumex Yes
-bcdedit /set uselegacyapicmode No
-bcdedit /set ems No
-bcdedit /set extendedinput Yes
-bcdedit /set debug No
-bcdedit /set hypervisorlaunchtype Off
-timeout /t 3 /nobreak > NUL
-
-:: NFTS tweaking..
-echo NFTS tweaking...
-fsutil behavior set memoryusage 2
-fsutil behavior set mftzone 4
-fsutil behavior set disablelastaccess 1
-fsutil behavior set disabledeletenotify 0
-fsutil behavior set encryptpagingfile 0
-timeout /t 3 /nobreak > NUL
-
-:: delete microCode
-echo Deleting Microcode
-takeown /f "%WinDir%\System32\mcupdate_genuineintel.dll" /r /d y
-takeown /f "%WinDir%\System32\mcupdate_authenticamd.dll" /r /d y
-icacls "%WinDir%\System32\mcupdate_genuineintel.dll" /grant:r Administrators:F /c
-icacls "%WinDir%\System32\mcupdate_authenticamd.dll" /grant:r Administrators:F /c
-del "%WinDir%\System32\mcupdate_genuineintel.dll" /s /f /q
-del "%WinDir%\System32\mcupdate_authenticamd.dll" /s /f /q
-timeout /t 1 /nobreak > NUL
-
-:win11
-cls
-
-: BCD Tweaks
-echo Applying BCD Tweaks
-bcdedit /set useplatformclock No
-bcdedit /seplatformtick No
-bcdedit /set disabledynamictick Yes
-timeout /t 3 /nobreak > NUL
-
-:: NTFS Tweaks
-echo Applying NTFS Tweaks
-fsutil behavior set memoryusage 2
-fsutil behavior set mftzone 4
-fsutil behavior set disablelastaccess 1
-fsutil behavior set disabledeletenotify 0
-fsutil behavior set encryptpagingfile 0
-timeout /t 3 /nobreak > NUL
-
 cls
 set z=[7m
 set i=[1m
@@ -403,7 +375,6 @@ if '%choice%'=='1' goto NVIDIA
 if '%choice%'=='2' goto AMD
 
 :NVIDIA
-cls
 
 :: NVIDIA Inspector Profile
 echo Applying NVIDIA Inspector Profile
@@ -463,9 +434,12 @@ schtasks /change /disable /tn "NvTmRep_CrashReport4_{B2FE1952-0186-46C3-BAEC-A80
 schtasks /change /disable /tn "NvDriverUpdateCheckDaily_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /disable /tn "NVIDIA GeForce Experience SelfUpdate_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
 schtasks /change /disable /tn "NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}"
+timeout /t 1 /nobreak > NUL
+
+timeout /t 5 /nobreak > NUL
+goto CompletedPerfOptimizations
 
 :AMD
-cls
 
 :: Enable MSI Mode for GPU
 echo Enabling MSI Mode
@@ -630,7 +604,9 @@ for %%a in (LTRSnoopL1Latency LTRSnoopL0Latency LTRNoSnoopL1Latency LTRMaxNoSnoo
         BGM_LTRSnoopL1Latency BGM_LTRSnoopL0Latency BGM_LTRNoSnoopL1Latency BGM_LTRNoSnoopL0Latency
         BGM_LTRMaxSnoopLatencyValue BGM_LTRMaxNoSnoopLatencyValue) do (reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "%%a" /t REG_DWORD /d "1" /f
 )
-timeout /t 1 /nobreak > NUL
+
+timeout /t 5 /nobreak > NUL
+goto CompletedPerfOptimizations
 
 :: device manager settings
 @REM settings manager devices
@@ -659,8 +635,6 @@ DevManView.exe /disable "WAN Miniport (PPPOE)"
 DevManView.exe /disable "WAN Miniport (PPTP)"
 DevManView.exe /disable "WAN Miniport (SSTP)"
 DevManView.exe /disable "WAN Miniport (Network Monitor)"
-cls
-echo.
 
 @REM Making changes to the registry...
 :: registry latency disabled
@@ -698,7 +672,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Pow
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "MonitorLatencyTolerance" /t REG_DWORD "1" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "MonitorRefreshLatencyTolerance" /t REG_DWORD "1" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power" /v "TransitionLatency" /t REG_DWORD "1" /f
-timeout /t 1 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 
 :: notification about free version completion
 reg add "HKEY_LOCAL_MACHINESOFTWARE\Microsoft\Office\15.0\Registration\{87D2B5BF-D47B-41FB-AF62-71C382F5CC85" /v "HideTrial" /t REG_DWORD /d "1" /f
@@ -746,7 +720,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
-timeout /t 2 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 
 :: other tweaks kernel and etc.
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "HwSchMode" /t REG_DWORD /d "2" /f
@@ -1937,7 +1911,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\EventLog-System\{f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\EventLog-System\{fcbb06bb-6a2a-46e3-abaa-246cb4e508b2}" /v "Enabled" /t REG_DWORD /d "0" /f
 timeout /t 3 /nobreak > NUL
 
-echo settings device/usb
+:: settings devices usb
 FOR /f %%a in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr /l "USB\VID_"') do (
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot reg -actn setowner -ownr "n:Administrators"
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot reg -actn ace -ace "n:Administrators;p:full"
@@ -1982,7 +1956,8 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 )
 timeout /t 3 /nobreak > NUL
 
-echo schtasks disabled...
+:: schtasks settings
+@REM schtasks disabled...
 schtasks /change /TN "Microsoft\Windows\Device Information\Device" /disable
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator"
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
@@ -2092,9 +2067,8 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :services
-cls
 
-echo disabled services windows...
+@REM disabled services windows...
 Powershell Set-Service AppVClient -StartupType Disabled
 Powershell Set-Service NetTcpPortSharing -StartupType Disabled
 Powershell Set-Service CscService -StartupType Disabled
@@ -2156,7 +2130,6 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :network
-cls
 
 echo Configuring Sock Address Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
