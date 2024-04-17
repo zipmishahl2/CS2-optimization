@@ -2162,6 +2162,22 @@ timeout /t 3 /nobreak > NUL
 goto home
 
 :network
+
+:: Reset Internet
+echo Resetting Internet
+ipconfig /release
+ipconfig /renew
+ipconfig /flushdns
+netsh int ip reset
+netsh int ipv4 reset
+netsh int ipv6 reset
+netsh int tcp reset
+netsh winsock reset
+netsh advfirewall reset
+netsh branchcache reset
+netsh http flush logbuffer
+timeout /t 3 /nobreak > NUL
+
 echo Configuring Sock Address Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MaxSockAddrLength" /t REG_DWORD /d "16" /f
@@ -2327,15 +2343,11 @@ if '%choice%'=='2' goto valorant
 if '%choice%'=='3' goto next
 
 :cs2
-cls
-
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\cs2.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 timeout /t 3 /nobreak >nul
 goto home
 
 :valorant
-cls
-
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\VALORANT.exe\PerfOptions" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 timeout /t 3 /nobreak >nul
 goto home
@@ -2356,15 +2368,11 @@ if '%choice%'=='1' goto fortnite
 if '%choice%'=='2' goto csgo
 
 :fortnite
-cls
-
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 timeout /t 3 /nobreak >nul
 goto home
 
 :csgo
-cls
-
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csgo.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 timeout /t 3 /nobreak >nul
 goto home
