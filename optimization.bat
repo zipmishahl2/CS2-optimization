@@ -1,7 +1,7 @@
 @echo off
 
 :: version #
-set Version=3.0 preBeta
+set Version=3.0 beta
 
 set z=[7m
 set i=[1m
@@ -94,9 +94,8 @@ if %HomeSelection% == 1 (call :optimization)
 if %HomeSelection% == 2 (call :services)
 if %HomeSelection% == 3 (call :network)
 if %HomeSelection% == 4 (call :gamepriority)
-pause
 
-:Optimization
+:optimization
 cls
 
 set z=[7m
@@ -167,7 +166,7 @@ icacls "%WinDir%\System32\mcupdate_genuineintel.dll" /grant:r Administrators:F /
 icacls "%WinDir%\System32\mcupdate_authenticamd.dll" /grant:r Administrators:F /c
 del "%WinDir%\System32\mcupdate_genuineintel.dll" /s /f /q
 del "%WinDir%\System32\mcupdate_authenticamd.dll" /s /f /q
-timeout /t 3 /nobreak > NUL
+timeout /t 1 /nobreak > NUL
 
 :win11
 cls
@@ -189,7 +188,6 @@ fsutil behavior set encryptpagingfile 0
 timeout /t 3 /nobreak > NUL
 
 :: Import power plan
-@REM Import power plan for all users
 curl -g -k -L -# -o "C:\powerplan.pow" "https://cdn.discordapp.com/attachments/1225846086111854706/1228754893968248852/powerplan.pow?ex=662d322b&is=661abd2b&hm=2f136b2e41366de65cf47742bbb6f3d62aa447c710ec8a9ad60e72aa00ea64e1&"
 powercfg -import "C:\powerplan.pow" 120ea5af-085f-41e2-8e8b-dd538b38e4f7
 powercfg -setactive 120ea5af-085f-41e2-8e8b-dd538b38e4f7
@@ -198,7 +196,6 @@ powercfg /hibernate off
 timeout /t 3 /nobreak > NUL
 
 :: clear pc
-@REM Cleaning PC
 del /s /f /q c:\windows\temp.
 del /s /f /q C:\WINDOWS\Prefetch
 del /s /f /q %temp%.
@@ -601,10 +598,9 @@ for %%a in (LTRSnoopL1Latency LTRSnoopL0Latency LTRNoSnoopL1Latency LTRMaxNoSnoo
         BGM_LTRSnoopL1Latency BGM_LTRSnoopL0Latency BGM_LTRNoSnoopL1Latency BGM_LTRNoSnoopL0Latency
         BGM_LTRMaxSnoopLatencyValue BGM_LTRMaxNoSnoopLatencyValue) do (reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v "%%a" /t REG_DWORD /d "1" /f
 )
-timeout /t 5 /nobreak > NUL
+timeout /t 3 /nobreak > NUL
 
 :: device manager settings
-@REM settings manager devices
 curl -g -k -L -# -o "C:\Windows\System32\DevManView.exe" "https://github.com/zipmishahl2/CS2-optimization/raw/main/DevManView.exe"
 DevManView.exe /disable "High Precision Event Timer"
 DevManView.exe /disable "Microsoft GS Wavetable Synth"
@@ -631,9 +627,9 @@ DevManView.exe /disable "WAN Miniport (PPTP)"
 DevManView.exe /disable "WAN Miniport (SSTP)"
 DevManView.exe /disable "WAN Miniport (Network Monitor)"
 
-@REM Making changes to the registry...
-:: registry latency disabled
+:: full settings regedit
 
+:: registry latency disabled
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power" /v "ExitLatency" /t REG_DWORD /d "1" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power" /v "ExitLatencyCheckEnabled /t REG_DWORD /d "1" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power" /v "Latency" /t REG_DWORD /d "1" /f
@@ -2006,7 +2002,6 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 timeout /t 3 /nobreak > NUL
 
 :: schtasks settings
-@REM schtasks disabled...
 schtasks /change /TN "Microsoft\Windows\Device Information\Device" /disable
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator"
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
@@ -2116,7 +2111,6 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :services
-@REM disabled services windows...
 Powershell Set-Service AppVClient -StartupType Disabled
 Powershell Set-Service NetTcpPortSharing -StartupType Disabled
 Powershell Set-Service CscService -StartupType Disabled
