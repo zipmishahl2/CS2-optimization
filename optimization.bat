@@ -2121,7 +2121,6 @@ if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :services
-
 @REM disabled services windows...
 Powershell Set-Service AppVClient -StartupType Disabled
 Powershell Set-Service NetTcpPortSharing -StartupType Disabled
@@ -2171,20 +2170,9 @@ Powershell Set-Service lltdsvc -StartupType Disabled
 sc delete DiagTrack
 sc delete dmwappushservice
 timeout /t 3 /nobreak > NUL
-echo Need a reboot, restart pc now or later?
-echo.
-echo [1] Reboot pc now?
-echo.
-echo [2] Later and return home
-echo.
-choice /c 12 /n
-set OptimizationSelection=%errorlevel%
-if %OptimizationSelection% == 1 (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
-if %OptimizationSelection% == 2 (goto home)
 goto home
 
 :network
-
 echo Configuring Sock Address Size
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MinSockAddrLength" /t REG_DWORD /d "16" /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MaxSockAddrLength" /t REG_DWORD /d "16" /f
@@ -2391,7 +2379,3 @@ cls
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csgo.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 timeout /t 3 /nobreak >nul
 goto home
-
-:close
-cls
-exit
