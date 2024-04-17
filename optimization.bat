@@ -358,10 +358,12 @@ timeout /t 3 /nobreak > NUL
 
 :: delete microCode
 echo Deleting Microcode
-takeown /f "C:\Windows\System32\mcupdate_GenuineIntel.dll" /r /d y
-takeown /f "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /r /d y
-del "C:\Windows\System32\mcupdate_GenuineIntel.dll" /s /f /q
-del "C:\Windows\System32\mcupdate_AuthenticAMD.dll" /s /f /q
+takeown /f "%WinDir%\System32\mcupdate_genuineintel.dll" /r /d y
+takeown /f "%WinDir%\System32\mcupdate_authenticamd.dll" /r /d y
+icacls "%WinDir%\System32\mcupdate_genuineintel.dll" /grant:r Administrators:F /c
+icacls "%WinDir%\System32\mcupdate_authenticamd.dll" /grant:r Administrators:F /c
+del "%WinDir%\System32\mcupdate_genuineintel.dll" /s /f /q
+del "%WinDir%\System32\mcupdate_authenticamd.dll" /s /f /q
 timeout /t 1 /nobreak > NUL
 
 :win11
