@@ -17,6 +17,7 @@ not playbooks and boosterx etc. so bad programs
 
 # download
 Get the latest version 2.8 (April 14, 2024) [here](https://github.com/zipmishahl2/cs2-optimization/releases/latest)
+
 SHA-256:
 7d247784a0e12e0367f3cf2a780516034cba74523bc9224d409daa9196f4d8a2
 
