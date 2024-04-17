@@ -59,7 +59,7 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 
 :Disclaimer
-reg query "HKCU\Software\CS2bth" /v "Disclaimer" >nul 2>&1 && goto CheckForUpdates
+reg query "HKCU\Software\CS2bth" /v "Disclaimer" >nul 2>&1 && goto Home
 cls
 echo.
 echo.
