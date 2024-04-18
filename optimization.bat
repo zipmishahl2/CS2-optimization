@@ -1,5 +1,5 @@
 @echo off
-set Version=3.0 beta
+set Version=3.0 RELEASE
 
 set z=[7m
 set i=[1m
@@ -1813,16 +1813,13 @@ schtasks /change /TN "Microsoft\Windows\WindowsColorSystem\Calibration Loader" /
 schtasks /change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchronization" /DISABLE > NUL 2>&1
 timeout /t 3 /nobreak > NUL
 cls
-echo Need a reboot, restart pc now or later?
+echo back home?
 echo.
-echo [1] Reboot pc now?
-echo.
-echo [2] Later and return home
+echo [1] back home
 echo.
 choice /c 12 /n
 if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
-if '%choice%'=='2' goto home
+if '%choice%'=='1' goto home
 
 :services
 Powershell Set-Service AppVClient -StartupType Disabled
