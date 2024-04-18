@@ -1820,10 +1820,9 @@ echo.
 echo [2] Later and return home
 echo.
 choice /c 12 /n
-set OptimizationSelection=%errorlevel%
-if %OptimizationSelection% == 1 (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
-if %OptimizationSelection% == 2 (goto home)
-goto home
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
+if '%choice%'=='2' goto home
 
 :services
 Powershell Set-Service AppVClient -StartupType Disabled
@@ -1873,11 +1872,19 @@ Powershell Set-Service SharedAccess -StartupType Disabled
 Powershell Set-Service lltdsvc -StartupType Disabled
 sc delete DiagTrack
 sc delete dmwappushservice
-timeout /t 3 /nobreak > NUL
-goto home
+timeout /t 2 /nobreak > NUL
+echo Need a reboot, restart pc now or later?
+echo.
+echo [1] Reboot pc now?
+echo.
+echo [2] Later and return home
+echo.
+choice /c 12 /n
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
+if '%choice%'=='2' goto home
 
 :network
-cls
 
 :: Reset Internet
 echo Resetting Internet
@@ -2033,7 +2040,6 @@ timeout /t 1 /nobreak > NUL
 goto home
 
 :gamepriority
-
 cls
 set z=[7m
 set i=[1m
@@ -2065,6 +2071,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 timeout /t 3 /nobreak >nul
 goto home
 
+cls
 set z=[7m
 set i=[1m
 set q=[0m
