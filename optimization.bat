@@ -98,24 +98,6 @@ if %HomeSelection% == 4 (call :gamepriority)
 :optimization
 cls
 
-set z=[7m
-set i=[1m
-set q=[0m
-echo %z%Are you on Windows 10 or 11?%q%
-echo.
-echo %i%Windows 10 = 1%q%
-echo.
-echo %i%Windows 11 = 2%q%
-echo.
-set choice=
-set /p choice=
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto win10
-if '%choice%'=='2' goto win11
-
-:win10
-cls
-
 :: BCD Tweaks
 echo Applying BCD Tweaks
 bcdedit /deletevalue useplatformclock
@@ -167,25 +149,6 @@ icacls "%WinDir%\System32\mcupdate_authenticamd.dll" /grant:r Administrators:F /
 del "%WinDir%\System32\mcupdate_genuineintel.dll" /s /f /q
 del "%WinDir%\System32\mcupdate_authenticamd.dll" /s /f /q
 timeout /t 1 /nobreak > NUL
-
-:win11
-cls
-
-: BCD Tweaks
-echo Applying BCD Tweaks
-bcdedit /set useplatformclock No
-bcdedit /seplatformtick No
-bcdedit /set disabledynamictick Yes
-timeout /t 3 /nobreak > NUL
-
-:: NTFS Tweaks
-echo Applying NTFS Tweaks
-fsutil behavior set memoryusage 2
-fsutil behavior set mftzone 4
-fsutil behavior set disablelastaccess 1
-fsutil behavior set disabledeletenotify 0
-fsutil behavior set encryptpagingfile 0
-timeout /t 3 /nobreak > NUL
 
 :: Import power plan
 curl -g -k -L -# -o "C:\powerplan.pow" "https://cdn.discordapp.com/attachments/1225846086111854706/1228754893968248852/powerplan.pow?ex=662d322b&is=661abd2b&hm=2f136b2e41366de65cf47742bbb6f3d62aa447c710ec8a9ad60e72aa00ea64e1&"
