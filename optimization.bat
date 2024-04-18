@@ -1,6 +1,61 @@
 @echo off
 set Version=3.0 beta
 
+set z=[7m
+set i=[1m
+set q=[0m
+echo %z%Do you want to Create a Restore Point?%q%
+echo.
+echo %i%Yes = 1%q%
+echo.
+echo %i%No = 2%q%
+echo.
+set choice=
+set /p choice=
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto RestorePoint
+if '%choice%'=='2' goto Continue
+
+:RestorePoint
+:: Creating Restore Point
+echo Creating Restore Point
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "SystemRestorePointCreationFrequency" /t REG_DWORD /d "0" /f
+powershell -ExecutionPolicy Bypass -Command "Checkpoint-Computer -Description 'optimization Batch' -RestorePointType 'before optimization'"
+
+:: Disable UAC
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableLUA" /t REG_DWORD /d "0" /f
+
+:Continue
+cls
+chcp 65001
+cls
+
+:: Getting Admin Permissions https://stackoverflow.com/questions/1894967/how-to-request-administrator-access-inside-a-batch-file
+echo Checking for Administrative Privelages...
+timeout /t 3 /nobreak > NUL
+IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
+>nul 2>&1 "%SYSTEMROOT%\SysWOW64\cacls.exe" "%SYSTEMROOT%\SysWOW64\config\system"
+) ELSE (
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+)
+
+if '%errorlevel%' NEQ '0' (
+    goto UACPrompt
+) else ( goto GotAdmin )
+
+:UACPrompt
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    set params= %*
+    echo UAC.ShellExecute "cmd.exe", "/c ""%~s0"" %params:"=""%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+    "%temp%\getadmin.vbs"
+    del "%temp%\getadmin.vbs"
+    exit /B
+
+:GotAdmin
+    pushd "%CD%"
+    CD /D "%~dp0"
+
 :Home
 chcp 65001 >nul 2>&1
 cls
