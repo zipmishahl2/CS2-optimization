@@ -343,6 +343,24 @@ DevManView.exe /disable "WAN Miniport (PPTP)"
 DevManView.exe /disable "WAN Miniport (SSTP)"
 DevManView.exe /disable "WAN Miniport (Network Monitor)"
 
+echo "Disabling powersaving features"
+for %%a in (
+	EnhancedPowerManagementEnabled
+	AllowIdleIrpInD3
+	EnableSelectiveSuspend
+	DeviceSelectiveSuspended
+	SelectiveSuspendEnabled
+	SelectiveSuspendOn
+	WaitWakeEnabled
+	D3ColdSupported
+	WdfDirectedPowerTransitionEnable
+	EnableIdlePowerManagement
+	IdleInWorkingState
+) do for /f "delims=" %%b in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum" /s /f "%%a" ^| findstr "HKEY"') do Reg.exe add "%%b" /v "%%a" /t REG_DWORD /d "0" /f > NUL 2>&1
+
+echo disable powershell telemetry
+Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v "POWERSHELL_TELEMETRY_OPTOUT" /t REG_SZ /d "1" /f
+
 :: registry latency disabled
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power" /v "ExitLatency" /t REG_DWORD /d "1" /f
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power" /v "ExitLatencyCheckEnabled /t REG_DWORD /d "1" /f
@@ -2047,14 +2065,17 @@ echo %i%cs2 = 1%q%
 echo.
 echo %i%valorant = 2%q%
 echo.
-echo %i%next = 3%q%
+echo %i%fortnite = 3%q%
+echo.
+echo %i%dota2 = 4%q%
 echo.
 set choice=
 set /p choice=
 if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' goto cs2
 if '%choice%'=='2' goto valorant
-if '%choice%'=='3' goto next
+if '%choice%'=='3' goto fortnite
+if '%choice%'=='4' goto dota2
 
 :cs2
 cls
@@ -2068,30 +2089,14 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 timeout /t 3 /nobreak >nul
 goto home
 
-cls
-set z=[7m
-set i=[1m
-set q=[0m
-echo %z%Are you on fortnite, csgo?%q%
-echo.
-echo %i%fortnite = 1%q%
-echo.
-echo %i%csgo = 2%q%
-echo.
-set choice=
-set /p choice=
-if not '%choice%'=='' set choice=%choice:~0,1%
-if '%choice%'=='1' goto fortnite
-if '%choice%'=='2' goto csgo
-
 :fortnite
 cls
 reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\FortniteClient-Win64-Shipping.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 timeout /t 3 /nobreak >nul
 goto home
 
-:csgo
+:dota2
 cls
-reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csgo.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DOTA2.exe" /v "CpuPriorityClass" /t REG_DWORD /d "8" /f
 timeout /t 3 /nobreak >nul
 goto home
