@@ -16,10 +16,10 @@ not playbooks and boosterx etc. so bad programs
 ```
 
 # download
-Get the latest version 2.8 (April 14, 2024) [here](https://github.com/zipmishahl2/cs2-optimization/releases/latest)
+Get the latest version 3.0 (April 18, 2024) [here](https://github.com/zipmishahl2/cs2-optimization/releases/latest)
 
 SHA-256:
-7d247784a0e12e0367f3cf2a780516034cba74523bc9224d409daa9196f4d8a2
+3fd16d556a5d4c9687daff080a134add8623d27a12031633ad88299b74dc7221
 
 > [!Caution]
 > We are not responsible for the attitude of your system, you do it at your own risk.
