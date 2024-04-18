@@ -87,11 +87,11 @@ echo.
 echo.                          %c%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %c%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t% 
 set choice=
 set /p choice=
-set HomeSelection=%errorlevel%
-if %HomeSelection% == 1 (call :optimization)
-if %HomeSelection% == 2 (call :services)
-if %HomeSelection% == 3 (call :network)
-if %HomeSelection% == 4 (call :gamepriority)
+if not '%choice%'=='' set choice=%choice:~0,1%
+if '%choice%'=='1' goto optimization
+if '%choice%'=='2' goto services
+if '%choice%'=='3' goto network
+if '%choice%'=='4' goto gamepriority
 
 :optimization
 cls
