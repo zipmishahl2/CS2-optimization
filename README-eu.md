@@ -13,7 +13,7 @@ RAM: 16 GB
 * Fast boot - off (blue screens people complain about)
 * SVM Mode (virtualization is AMD-V)
 * XMP profile enable (profile 1)
-* Leave TPM and Seture Boot (if you have Windows 11)
+* TPM and Seture Boot (if you have Windows 11)
 * CSM support (disabled if Windows is on GPT)
 * hyperthreading(SMT Mode) - on
 * C-states - off
@@ -21,6 +21,7 @@ RAM: 16 GB
 ### INTEL setup
 * VT-d virtual machine - off
 * Intel virtualization - off
+* TPM and Seture Boot (if you have Windows 11)
 * Fast boot - off (blue screens people complain about)
 * lntel Speed ​​Shit Technology - off
 * Intel Turbo boost - off
