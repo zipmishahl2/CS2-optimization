@@ -1,35 +1,40 @@
 #### авторские права © zipmishahl2 GitHub
 
-# КС2 оптимизация | ФПС БУСТ
+# КС2 оптимизация
+
 ## Тесты КС2
 Видеокарта: GTX 1060 6ГБ
-
 Процессор: AMD 5 1600X
-
 Оперативной памяти: 16 ГБ
 
 ### 120 FPS > 400 FPS
 ## Перед настройкой BIOS обновите до последней версии прошивки
 # Настройка BIOS для повышения ФПС
-### AMD отключение
+### AMD Настройка
 * Fast boot - откл (синие экраны жалуются люди) 
 * SVM Mode (виртуализация это AMD-V)
 * XMP профиль включить (профиль 1)
 * TPM и Seture Boot оставить (если у вас вин11)
 * CSM support (откл если винда на GPT)
-* hyperthreading(SMT Mode) - откл
-### INTEL отключение
+* hyperthreading(SMT Mode) - вкл
+
+### INTEL настройка
 * VT-d виртуалка - откл
+* Intel virtualization - откл
 * Fast boot - откл (синие экраны жалуются люди) 
 * lntel Speed Shit Technology - откл
+* Intel Turbo boost - выкл
 * CSM support (откл если винда на GPT)
 * CPG Lock - откл
+* Above 4G Decoding - вкл
+* hyperthreading - вкл
+* C-states - выкл
 
 # Выбор Windows под КС2
-DraganOS win10 - win11
+DraganOS win10
 
 # Как оптимизировать КС2?
-- для того чтобы оптимизировать игру нам нужен reg файл и настройка пк
+- для того чтобы оптимизировать игру нам нужен reg файл и настройка [пк](https://github.com/zipmishahl2/CS2-optimization/releases/download/optimizaton/cs2.optimizaton.rar)
 
 окей, для того чтобы игра была без фризов маленьких, примите этот твик который находится в releases
 этот твик выключает оверлей кс2 чтобы играли без фризов 
