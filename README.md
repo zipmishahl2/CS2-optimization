@@ -5,8 +5,6 @@
 
 [🇺🇸English](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-eu.md)
 
-[🇰🇿Қазақстан әзірлеуде](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-kz.md)
-
 # System requirements
 - windows 10 - 11
 
