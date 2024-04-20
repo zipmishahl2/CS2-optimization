@@ -14,14 +14,14 @@
 * Fast boot - откл (синие экраны жалуются люди) 
 * SVM Mode (виртуализация это AMD-V)
 * XMP профиль включить (профиль 1)
-* TPM и Seture Boot оставить (если у вас вин11)
+* TPM и Setuce Boot оставить (если у вас вин11)
 * CSM support (откл если винда на GPT)
 * hyperthreading(SMT Mode) - вкл
 
 ### INTEL настройка
 * VT-d виртуалка - откл
 * Intel virtualization - откл
-* TPM и Seture Boot оставить (если у вас вин11)
+* TPM и Setuce Boot оставить (если у вас вин11)
 * Fast boot - откл (синие экраны жалуются люди) 
 * lntel Speed Shit Technology - откл
 * Intel Turbo boost - выкл
