@@ -30,7 +30,7 @@
 * C-states - викл
 
 # Вибір Windows під КС2
-DraganOS win10 - win11
+DraganOS win10
 
 # Як оптимізувати КС2?
 - для того щоб оптимізувати гру нам потрібен reg файл і налаштування [пк](https://github.com/zipmishahl2/CS2-optimization/releases/download/optimizaton/cs2.optimizaton.rar)
