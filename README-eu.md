@@ -1,35 +1,40 @@
 #### copyright © zipmishahl2 GitHub
 
-# CS2 optimization | FPS BOOST
+# CS2 optimization
 ## CS2 tests
 Video card: GTX 1060 6GB
-
 Processor: AMD 5 1600X
-
 RAM: 16 GB
 
 ### 120 FPS > 400 FPS
 ## Before setting up the BIOS, update to the latest firmware version
 # Setting up BIOS to increase FPS
-### AMD Disable
+### AMD Settings
 * Fast boot - off (blue screens people complain about)
 * SVM Mode (virtualization is AMD-V)
 * XMP profile enable (profile 1)
 * Leave TPM and Seture Boot (if you have Windows 11)
 * CSM support (disabled if Windows is on GPT)
-* hyperthreading(SMT Mode) - off
-### INTEL Disable
-* VT-d virtual machine
-* Fast boot (blue screens people complain about)
-* lntel Speed Shit Technology
+* hyperthreading(SMT Mode) - on
+* C-states - off
+
+### INTEL setup
+* VT-d virtual machine - off
+* Intel virtualization - off
+* Fast boot - off (blue screens people complain about)
+* lntel Speed ​​Shit Technology - off
+* Intel Turbo boost - off
 * CSM support (disabled if Windows is on GPT)
-* CPG Lock
+* CPG Lock - off
+* Above 4G Decoding - on
+* hyperthreading - on
+* C-states - off
 
 # Selecting Windows for CS2
 DraganOS win10 - win11
 
 # How to optimize CS2?
-- in order to optimize the game we need a reg file and PC settings
+- in order to optimize the game we need a reg file and settings [PC](https://github.com/zipmishahl2/CS2-optimization/releases/download/optimizaton/cs2.optimizaton.rar)
 
 ok, in order for the game to be without small friezes, take this tweak which is in releases
 This tweak turns off the cs2 overlay so you can play without freezes
