@@ -21,6 +21,7 @@
 ### INTEL настройка
 * VT-d виртуалка - откл
 * Intel virtualization - откл
+* TPM и Seture Boot оставить (если у вас вин11)
 * Fast boot - откл (синие экраны жалуются люди) 
 * lntel Speed Shit Technology - откл
 * Intel Turbo boost - выкл
