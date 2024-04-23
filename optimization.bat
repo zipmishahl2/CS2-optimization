@@ -69,12 +69,12 @@ echo.
 echo.
 echo.
 echo.
-echo                           %c%╔═══╗╔══╗───╔══╗╔═══╗╔════╗╔══╗╔╗──╔╗╔══╗╔═══╗╔══╗╔════╗╔══╗╔══╗╔╗─╔╗%c%
-echo                           %c%║╔═╗║║╔═╝───║╔╗║║╔═╗║╚═╗╔═╝╚╗╔╝║║──║║╚╗╔╝╚═╗─║║╔╗║╚═╗╔═╝╚╗╔╝║╔╗║║╚═╝║%c%
-echo                           %c%║╚═╝║║║─────║║║║║╚═╝║──║║───║║─║╚╗╔╝║─║║──╔╝╔╝║╚╝║──║║───║║─║║║║║╔╗─║%c%
-echo                           %c%║╔══╝║║─────║║║║║╔══╝──║║───║║─║╔╗╔╗║─║║─╔╝╔╝─║╔╗║──║║───║║─║║║║║║╚╗║%c%
-echo                           %c%║║───║╚═╗───║╚╝║║║─────║║──╔╝╚╗║║╚╝║║╔╝╚╗║─╚═╗║║║║──║║──╔╝╚╗║╚╝║║║─║║%c%
-echo                           %c%╚╝───╚══╝───╚══╝╚╝─────╚╝──╚══╝╚╝──╚╝╚══╝╚═══╝╚╝╚╝──╚╝──╚══╝╚══╝╚╝─╚╝%c%
+echo                              %c%╔═══╗╔══╗───╔══╗╔═══╗╔════╗╔══╗╔╗──╔╗╔══╗╔═══╗╔══╗╔════╗╔══╗╔══╗╔╗─╔╗%c%
+echo                              %c%║╔═╗║║╔═╝───║╔╗║║╔═╗║╚═╗╔═╝╚╗╔╝║║──║║╚╗╔╝╚═╗─║║╔╗║╚═╗╔═╝╚╗╔╝║╔╗║║╚═╝║%c%
+echo                              %c%║╚═╝║║║─────║║║║║╚═╝║──║║───║║─║╚╗╔╝║─║║──╔╝╔╝║╚╝║──║║───║║─║║║║║╔╗─║%c%
+echo                              %c%║╔══╝║║─────║║║║║╔══╝──║║───║║─║╔╗╔╗║─║║─╔╝╔╝─║╔╗║──║║───║║─║║║║║║╚╗║%c%
+echo                              %c%║║───║╚═╗───║╚╝║║║─────║║──╔╝╚╗║║╚╝║║╔╝╚╗║─╚═╗║║║║──║║──╔╝╚╗║╚╝║║║─║║%c%
+echo                              %c%╚╝───╚══╝───╚══╝╚╝─────╚╝──╚══╝╚╝──╚╝╚══╝╚═══╝╚╝╚╝──╚╝──╚══╝╚══╝╚╝─╚╝%c%
 echo                                                   %c%Created By: zipmishahl2%t%     
 echo                                                      %c%%u%Version: %Version%%q%%t%
 echo.
@@ -117,7 +117,7 @@ bcdedit /set MSI Default
 bcdedit /set usephysicaldestination No
 bcdedit /set usefirmwarepcisettings No
 bcdedit /set disableelamdrivers Yes
-bcdedit /set pae ForceEnable 
+bcdedit /set pae ForceEnable
 bcdedit /set nx optout
 bcdedit /set highestmode Yes
 bcdedit /set forcefipscrypto No
@@ -501,6 +501,13 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "AllowSearchT
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "DisableWebSearch" /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWebOverMeteredConnections" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "0" /f
 reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d "1" /f
 timeout /t 3 /nobreak > NUL
 
