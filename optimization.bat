@@ -1742,7 +1742,6 @@ FOR /F %%a in ('WMIC PATH Win32_USBHub GET DeviceID^| FINDSTR /L "VID_"') DO (
 timeout /t 3 /nobreak > NUL
 
 :: schtasks settings
-schtasks /change /TN "Microsoft\Windows\Device Information\Device" /disable
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator"
 schtasks /change /tn "\Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /disable
 schtasks /end /tn "\Microsoft\Windows\Customer Experience Improvement Program\BthSQM"
@@ -1762,7 +1761,7 @@ schtasks /change /tn "\Microsoft\Windows\Application Experience\StartupAppTask" 
 schtasks /end /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector"
 schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /disable
 schtasks /end /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver"
-schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver"
+schtasks /change /tn "\Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticResolver" /disable
 schtasks /end /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem"
 schtasks /change /tn "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /disable
 schtasks /end /tn "\Microsoft\Windows\Shell\FamilySafetyMonitor"
@@ -1779,12 +1778,12 @@ schtasks /end /tn "\Microsoft\Windows\Application Experience\AitAgent"
 schtasks /change /tn "\Microsoft\Windows\Application Experience\AitAgent" /disable
 schtasks /end /tn "\Microsoft\Windows\Windows Error Reporting\QueueReporting"
 schtasks /change /tn "\Microsoft\Windows\Windows Error Reporting\QueueReporting" /disable
-schtasks /end /tn "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask
+schtasks /end /tn "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask"
 schtasks /change /tn "\Microsoft\Windows\CloudExperienceHost\CreateObjectTask" /disable
 schtasks /end /tn "\Microsoft\Windows\DiskFootprint\Diagnostics"
 schtasks /change /tn "\Microsoft\Windows\DiskFootprint\Diagnostics" /disable
 schtasks /end /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)"
-schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)" /disable
+schtasks /change /tn "\Microsoft\Windows\FileHistory\File History (maintenance mode)"
 schtasks /end /tn "\Microsoft\Windows\PI\Sqm-Tasks"
 schtasks /change /tn "\Microsoft\Windows\PI\Sqm-Tasks" /disable
 schtasks /end /tn "\Microsoft\Windows\NetTrace\GatherNetworkInfo"
@@ -1809,33 +1808,6 @@ schtasks /end /tn "\Microsoft\Windows\WindowsUpdate\Automatic App Update"
 schtasks /change /TN "\Microsoft\Windows\WindowsUpdate\Automatic App Update" /disable
 schtasks /end /tn "\Microsoft\Windows\Device Information\Device"
 schtasks /change /TN "\Microsoft\Windows\Device Information\Device" /disable
-schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64 Critical" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 Critical" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\ApplicationData\appuriverifierdaily" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\ApplicationData\appuriverifierinstall" /DISABLE > NUL 2>&1
-schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /DISABLE > NUL 2>&1
-schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /DISABLE > NUL 2>&1
-schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Device Information\Device" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Diagnosis\Scheduled" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\DiskFootprint\Diagnostics" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\DiskFootprint\StorageSense" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Feedback\Siuf\DmClient" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\International\Synchronize Language Settings" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\LanguageComponentsInstaller\Installation" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\LanguageComponentsInstaller\ReconcileLanguageResources" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Maps\MapsUpdateTask" /DISABLE > NUL 2>&1
-schtasks /Change /TN "Microsoft\Windows\Maps\MapsToastTask" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\PushToInstall\Registration" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Setup\SetupCleanupTask" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\WindowsColorSystem\Calibration Loader" /DISABLE > NUL 2>&1
-schtasks /change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchronization" /DISABLE > NUL 2>&1
 timeout /t 3 /nobreak > NUL
 cls
 echo back home?
