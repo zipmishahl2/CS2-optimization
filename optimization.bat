@@ -81,7 +81,7 @@ echo.
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo.
 echo.
-echo.                          %c%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %c%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services%t%
+echo.                          %c%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %c%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services (no recommend win11)%t%
 echo. 
 echo.
 echo.                          %c%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %c%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t% 
