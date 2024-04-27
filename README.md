@@ -1,3 +1,11 @@
+<a href="https://star-history.com/#zipmishahl2/CS2-optimization&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=zipmishahl2/CS2-optimization&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=zipmishahl2/CS2-optimization&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=zipmishahl2/CS2-optimization&type=Timeline" />
+ </picture>
+</a>
+
 # click on your language
 [🇺🇸English](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-eu.md)
 
