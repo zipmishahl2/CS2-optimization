@@ -81,7 +81,7 @@ echo.
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo.
 echo.
-echo.                          %c%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %c%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services (no recommend win11)%t%
+echo.                          %c%[%y% %c%%u%1%q%%t% %w%]%y% %c%Optimization%t%                    %c%[%y% %c%%u%2%q% %t%%w%]%y% %c%Services (not recommended for Windows 11)%t%
 echo. 
 echo.
 echo.                          %c%[%y% %c%%u%3%q%%t% %w%]%y% %c%Network%t%                         %c%[%y% %c%%u%4%q% %t%%w%]%y% %c%Game Priority%t% 
@@ -184,7 +184,6 @@ deltree /y c:\windows\recent
 deltree /y c:\windows\spool\printers
 
 :: powershell tweaking
-@rem Debloat Windows & Remove Preinstalled Programs
 powershell "ForEach($v in (Get-Command -Name \"Set-ProcessMitigation\").Parameters[\"Disable\"].Attributes.ValidValues){Set-ProcessMitigation -System -Disable $v.ToString() -ErrorAction SilentlyContinue}"
 powershell "Remove-Item -Path \"HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\*\" -Recurse -ErrorAction SilentlyContinue"
 PowerShell -Command "Disable-MMAgent -PageCombining"
@@ -399,6 +398,10 @@ timeout /t 3 /nobreak > NUL
 
 :: notification about free version completion
 reg add "HKEY_LOCAL_MACHINESOFTWARE\Microsoft\Office\15.0\Registration\{87D2B5BF-D47B-41FB-AF62-71C382F5CC85" /v "HideTrial" /t REG_DWORD /d "1" /f
+
+:: setting the value for devices
+reg add "HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters" /v "MouseDataQueueSize" /t REG_DWORD "32" /f
+reg add "HLKM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "KeyboardDataQueueSize" /t REG_DWORD "32" /f
 
 :: Windows privacy 
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" /v "Value" /t REG_SZ /d "Deny" /f
