@@ -98,8 +98,8 @@ if '%choice%'=='4' goto gamepriority
 :optimization
 cls
 
-:: BCD Tweaks
-echo Applying BCD Tweaks
+:: BCD Tweaks System
+echo Applying BCD Tweaks System
 bcdedit /deletevalue useplatformclock
 bcdedit /set bootmenupolicy Legacy
 bcdedit /set platformtick No
@@ -115,7 +115,6 @@ bcdedit /set vsmlaunchtype Off
 bcdedit /set vm No
 bcdedit /set x2apicpolicy Enable
 bcdedit /set configaccesspolicy Default
-bcdedit /set MSI Default
 bcdedit /set usephysicaldestination No
 bcdedit /set usefirmwarepcisettings No
 bcdedit /set disableelamdrivers Yes
@@ -131,8 +130,8 @@ bcdedit /set debug No
 bcdedit /set hypervisorlaunchtype Off
 timeout /t 3 /nobreak > NUL
 
-:: NFTS tweaking..
-echo NFTS tweaking...
+:: NFTS tweaking System..
+echo NFTS tweaking System...
 fsutil behavior set memoryusage 2
 fsutil behavior set mftzone 4
 fsutil behavior set disablelastaccess 1
@@ -140,8 +139,8 @@ fsutil behavior set disabledeletenotify 0
 fsutil behavior set encryptpagingfile 0
 timeout /t 3 /nobreak > NUL
 
-:: delete microCode
-echo Deleting Microcode
+:: Delete MicroCode files
+echo Deleting Microcode files...
 takeown /f "%WinDir%\System32\mcupdate_genuineintel.dll" /r /d y
 takeown /f "%WinDir%\System32\mcupdate_authenticamd.dll" /r /d y
 icacls "%WinDir%\System32\mcupdate_genuineintel.dll" /grant:r Administrators:F /c
@@ -299,8 +298,8 @@ for /f %%i in ('wmic path Win32_VideoController get PNPDeviceID^| findstr /L "PC
 	for /f "tokens=3" %%a in ('Reg query "HKLM\SYSTEM\ControlSet001\Enum\%%i" /v "Driver"') do (
 		for /f %%i in ('echo %%a ^| findstr "{"') do (
 		     Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Class\%%i" /v "DisableDynamicPstate" /t Reg_DWORD /d "1" /f
-    )
   )
+ )
 )
 timeout /t 3 /nobreak > NUL
 
@@ -309,12 +308,6 @@ Reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\%%n\Device Parameters\Inte
 Reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\%%n\Device Parameters\Interrupt Management\Affinity Policy" /v "DevicePolicy" /t Reg_DWORD /d "4" /f
 Reg ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\%%n\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties" /v "MessageNumberLimit" /t Reg_DWORD /d "256" /f
 )
-
-echo Disable Gpu Scaling
-for /f %%i in ('Reg query "HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /s /f Scaling') do set "str=%%i" & if "!str!" neq "!str:Configuration\=!" (
-	Reg add "%%i" /v "Scaling" /t Reg_DWORD /d "1" /f 
-)
-
 timeout /t 3 /nobreak > NUL
 
 :: device manager settings
@@ -335,14 +328,6 @@ DevManView.exe /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
 DevManView.exe /disable "NDIS Virtual Network Adapter Enumerator"
 DevManView.exe /disable "Remote Desktop Device Redirector Bus"
 DevManView.exe /disable "UMBus Root Bus Enumerator"
-DevManView.exe /disable "WAN Miniport (IP)"
-DevManView.exe /disable "WAN Miniport (IKEv2)"
-DevManView.exe /disable "WAN Miniport (IPv6)"
-DevManView.exe /disable "WAN Miniport (L2TP)"
-DevManView.exe /disable "WAN Miniport (PPPOE)"
-DevManView.exe /disable "WAN Miniport (PPTP)"
-DevManView.exe /disable "WAN Miniport (SSTP)"
-DevManView.exe /disable "WAN Miniport (Network Monitor)"
 
 echo "Disabling powersaving features"
 for %%a in (
@@ -362,7 +347,7 @@ for %%a in (
 echo disable powershell telemetry
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v "POWERSHELL_TELEMETRY_OPTOUT" /t Reg_SZ /d "1" /f
 
-:: Registry latency disabled
+:: registry latency disabled
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power" /v "ExitLatency" /t Reg_DWORD /d "1" /f
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power" /v "ExitLatencyCheckEnabled /t Reg_DWORD /d "1" /f
 Reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power" /v "Latency" /t Reg_DWORD /d "1" /f
@@ -1757,8 +1742,6 @@ timeout /t 3 /nobreak > NUL
 FOR /f %%a in ('wmic PATH Win32_PnPEntity GET DeviceID ^| findstr /l "USB\VID_"') do (
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot Reg -actn setowner -ownr "n:Administrators"
 C:\Windows\SetACL.exe -on "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" -ot Reg -actn ace -ace "n:Administrators;p:full"
-Reg add "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" /v SelectiveSuspendOn /t Reg_DWORD /d 00000000 /f
-Reg add "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" /v SelectiveSuspendEnabled /t Reg_BINARY /d 00 /f
 Reg add "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" /v EnhancedPowerManagementEnabled /t Reg_DWORD /d 00000000 /f
 Reg add "HKLM\SYSTEM\ControlSet001\Enum\%%a\Device Parameters" /v AllowIdleIrpInD3 /t Reg_DWORD /d 00000000 /f
 )
@@ -1931,7 +1914,6 @@ if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
 if '%choice%'=='2' goto home
 
-:: author ancel tweaks
 :network
 
 :: Reset Internet
@@ -1954,8 +1936,8 @@ Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "Mi
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Winsock" /v "MaxSockAddrLength" /t Reg_DWORD /d "16" /f
 timeout /t 1 /nobreak > NUL
 
-:: Disable Nagle's Algorithm
-echo Disabling Nagle's Algorithm
+:: Settings TCP
+echo Settings TCP
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" /v "TcpAckFrequency" /t Reg_DWORD /d "1" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" /v "TCPNoDelay" /t Reg_DWORD /d "1" /f
 Reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces" /v "TcpDelAckTicks" /t Reg_DWORD /d "0" /f
@@ -1977,8 +1959,8 @@ echo Disabling Oplocks
 Reg add "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v "EnableOplocks" /t Reg_DWORD /d "0" /f
 timeout /t 1 /nobreak > NUL
 
-:: Set IRP Stack Size
-echo Setting IRP Stack Size
+:: Set Stack Size
+echo Setting Stack Size
 Reg add "HKLM\SYSTEM\CurrentControlSet\services\LanmanServer\Parameters" /v "IRPStackSize" /t Reg_DWORD /d "20" /f
 timeout /t 1 /nobreak > NUL
 
@@ -2080,9 +2062,6 @@ Reg add "%%n" /v "*InterruptModeration" /t Reg_SZ /d "0" /f
 timeout /t 1 /nobreak > NUL
 )
 
-:: Enable WeakHost Send and Recieve
-echo Enabling WH Send and Recieve
-powershell "Get-NetAdapter -IncludeHidden | Set-NetIPInterface -WeakHostSend Enabled -WeakHostReceive Enabled -ErrorAction SilentlyContinue"
 timeout /t 1 /nobreak > NUL
 goto home
 
