@@ -7,11 +7,11 @@
 </a>
 
 # click on your language
-[🇺🇸English](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-eu.md)
+[🇺🇸 English](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-eu.md)
 
-[🇷🇺Russian](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-ru.md)
+[🇷🇺 Russian](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-ru.md)
 
-[🇺🇦український](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-ua.md)
+[🇺🇦 Український](https://github.com/zipmishahl2/CS2-optimization/blob/main/README-ua.md)
 
 # System requirements
 - windows 10 - 11
