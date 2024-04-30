@@ -1,5 +1,5 @@
 @echo off
-set Version=3.1 RELEASE
+set Version=3.4 Beta
 set customWin=DraganOS 10
 
 set z=[7m
@@ -1931,6 +1931,7 @@ if not '%choice%'=='' set choice=%choice:~0,1%
 if '%choice%'=='1' (cls & echo Close all applications to make your PC reboot faster, you have 10 second. & shutdown /r /t 10)
 if '%choice%'=='2' goto home
 
+:: author ancel tweaks
 :network
 
 :: Reset Internet
