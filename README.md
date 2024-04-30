@@ -18,7 +18,7 @@
 
 - The most stable Windows: Win10
 ``` python
-not playbooks and boosterx etc. so bad programs
+boosterx etc. so bad programs
 ```
 
 # download
