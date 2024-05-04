@@ -15,17 +15,15 @@
 
 # System requirements
 - windows 10 - 11
+- Internet Connection
+- Administrator Permissions
 
-- The most stable Windows: Win10
 ``` python
 boosterx etc. so bad programs
 ```
 
 # download
-Get the latest version 3.0 (April 18, 2024) [here](https://github.com/zipmishahl2/cs2-optimization/releases/latest)
-
-SHA-256:
-3fd16d556a5d4c9687daff080a134add8623d27a12031633ad88299b74dc7221
+Get the latest version 3.1 (April 30, 2024) [here](https://github.com/zipmishahl2/cs2-optimization/releases/latest)
 
 > [!Caution]
 > We are not responsible for the attitude of your system, you do it at your own risk.
