@@ -19,7 +19,7 @@
 - Administrator Permissions
 
 ``` python
-boosterx etc. so bad programs
+boosterx and etc. so bad programs
 ```
 
 # download
