@@ -328,6 +328,7 @@ DevManView.exe /disable "Microsoft Hyper-V Virtualization Infrastructure Driver"
 DevManView.exe /disable "NDIS Virtual Network Adapter Enumerator"
 DevManView.exe /disable "Remote Desktop Device Redirector Bus"
 DevManView.exe /disable "UMBus Root Bus Enumerator"
+timeout /t 3 /nobreak > NUL
 
 echo "Disabling powersaving features"
 for %%a in (
@@ -344,7 +345,7 @@ for %%a in (
 	IdleInWorkingState
 ) do for /f "delims=" %%b in ('Reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum" /s /f "%%a" ^| findstr "HKEY"') do Reg add "%%b" /v "%%a" /t Reg_DWORD /d "0" /f > NUL 2>&1
 
-echo disable powershell telemetry
+:: disable powershell telemetry
 Reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v "POWERSHELL_TELEMETRY_OPTOUT" /t Reg_SZ /d "1" /f
 
 :: registry latency disabled
@@ -387,8 +388,8 @@ timeout /t 3 /nobreak > NUL
 Reg add "HKEY_LOCAL_MACHINESOFTWARE\Microsoft\Office\15.0\Registration\{87D2B5BF-D47B-41FB-AF62-71C382F5CC85" /v "HideTrial" /t Reg_DWORD /d "1" /f
 
 :: setting the value for devices (latency)
-Reg add "HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters" /v "MouseDataQueueSize" /t Reg_DWORD "32" /f
-Reg add "HLKM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "KeyboardDataQueueSize" /t Reg_DWORD "32" /f
+Reg add "HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters" /v "MouseDataQueueSize" /t Reg_DWORD "16" /f
+Reg add "HLKM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters" /v "KeyboardDataQueueSize" /t Reg_DWORD "16" /f
 
 :: Windows privacy
 Reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Bluetooth" /v "AllowAdvertising" /t Reg_DWORD /d "0" /f
