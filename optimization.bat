@@ -106,7 +106,6 @@ bcdedit /set platformtick No
 bcdedit /set disabledynamictick Yes
 bcdedit /deletevalue useplatformclock
 bcdedit /set tscsyncpolicy Enhanced
-bcdedit /set firstmegabytepolicy UseAll
 bcdedit /set avoidlowmemory 0x8000000
 bcdedit /set nolowmem Yes
 bcdedit /set allowedinmemorysettings 0x0
