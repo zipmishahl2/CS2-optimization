@@ -58,6 +58,44 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
 
+:Disclaimer
+chcp 437>nul
+chcp 65001 >nul
+echo.
+echo.
+cls
+echo %g%_____________________________________
+echo.
+echo              %c%Disclaimer%u%         
+echo %g%_____________________________________
+echo.
+echo.
+echo.
+echo %c%CS2 optimization is a tweaking script that optimizes your%u% 
+echo %c%system to provide the best gaming experience possible.%u%
+echo.
+echo %c%Please be advised that%u% %r%I cannot guarantee an FPS increase%u% %c%by 
+echo implementing the suggested optimizations. Each system and%u%
+echo %c%configuration may have varying results.%u%
+echo.
+echo %c%It is important to note that everything presented here will be used at your%u% 
+echo %r%own risk.%u% %c%I will not be held liable for any damages caused due to failure to%u% 
+echo %c%follow the instructions carefully.%u%
+echo.
+echo %c%If you need clarification on a tweak, please refrain from using it and %u% 
+echo %c%contact me for further assistance.%u% 
+echo.
+echo %c%I recommend creating a manual restore point before%u% 
+echo %c%executing any tweaks.%u% 
+echo.
+echo %c%If you have any questions or concerns, please get in touch with me%u%
+echo %c%on%u% %y%Discord at Jamergamer_mod%u%
+echo.
+echo %g%======PRESS ANY KEY TO CONTINUE======
+
+pause >nul
+goto Home
+
 :Home
 chcp 65001 >nul 2>&1
 cls
