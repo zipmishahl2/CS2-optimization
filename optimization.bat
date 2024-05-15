@@ -1,7 +1,6 @@
 @echo off
 set Version=3.4 Beta
 set customWin=DraganOS 10
-set risk=USE AT YOUR OWN RISK!
 
 set z=[7m
 set i=[1m
@@ -118,7 +117,6 @@ echo                              %c%╚╝───╚══╝───╚═�
 echo                                                   %c%Created By: zipmishahl2%t%     
 echo                                                      %c%%u%Version: %Version%%q%%t%
 echo                                                       %c%%u%Best OS: %customWin%%q%%t%
-echo                                                        %c%%u%risk%%q%%t%
 echo.
 echo %w%════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════%y%
 echo.
