@@ -33,3 +33,6 @@ Get the latest version 3.1 (April 30, 2024) [here](https://github.com/zipmishahl
 
 > [!NOTE]
 > maximize performance and minimize latency. and higher framerates using standard Windows.
+
+> There will be no updates.
+> related to the motherfucking composition of the server skid
