@@ -39,4 +39,3 @@ Get the latest version 3.1 (April 30, 2024) [here](https://github.com/zipmishahl
 
 # tweaks for nvidia
 https://github.com/zipmishahl2/nvidia-tweaks
-base.nip not use (is development)
